@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="area_form_view_emp" model="ir.actions.act_window">
+            <field name="name">HR Area</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.area</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="bank_model_action" model="ir.actions.act_window">
+            <field name="name">Bank</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="hr_area_menu" name="Area" parent="hr.menu_human_resources_configuration"
+                  action="area_form_view_emp" sequence="101"/>
+        <menuitem id="bank_menu" name="Bank" parent="hr.menu_human_resources_configuration" action="bank_model_action"
+                  sequence="102"/>
+    </data>
+</odoo>

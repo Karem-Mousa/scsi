@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_project_edit_project_inherit" model="ir.ui.view">
+            <field name="name">excel_project_edit_project_inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='label_tasks']" position="before">
+                     <field name="x_project_name" />
+                </xpath>
+            </field>
+        </record>
+
+          <record id="excel_project_view_project_kanban_inherit" model="ir.ui.view">
+            <field name="name">excel_project_view_project_kanban_inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                     <field name="x_project_name" />
+                </xpath>
+                 <xpath expr="//div[hasclass('o_kanban_primary_left')]/div/span[1]" position="after">
+                    <div><t t-esc="record.x_project_name.value"/></div>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

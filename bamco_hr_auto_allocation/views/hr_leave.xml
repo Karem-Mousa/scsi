@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="hr_leave_view_form" model="ir.ui.view">
+            <field name="name">hr.leave.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="required_attachment" invisible="1"/>
+                    <!--                    <field name="remain_days_current_months" invisible="1"/>-->
+                    <!--                    <field name="alloc_days_current_months" invisible="1"/>-->
+                    <!--                    <field name="leaves_days_current_months" invisible="1"/>-->
+                    <field name="attachment_name" groups="base.group_user" invisible="1"/>
+                    <field name="attachment" filename="attachment_name" widget="binary"
+                           groups="base.group_user,ecc_portal_hr_leave.group_portal_leave"
+                           attrs="{'required':[('required_attachment','=',True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_leave_view_tree" model="ir.ui.view">
+            <field name="name">hr.leave.tree.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="code"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="hr_leave_allocation_view_tree" model="ir.ui.view">
+            <field name="name">hr.leave.allocation.tree.inherit</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="code"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

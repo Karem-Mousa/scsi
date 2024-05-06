@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+        <record id="leave_type_form_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.type.form</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='request_unit']" position="after">
+                    <label for="auto_allocation" string="Automatic Allocation"/>
+                    <div class="o_row o_row_readonly">
+                        <field name="auto_allocation" class="oe_inline" nolabel="1"/>
+                        <span class="oe_inline font-weight-bold" attrs="{'invisible':[('auto_allocation','=',False)]}">
+                            At
+                        </span>
+                        <field name="allocation_year"
+                               attrs="{'invisible':[('auto_allocation','=',False)],'required':[('auto_allocation','=',True)]}"
+                               class="oe_inline" nolabel="1"/>
+                    </div>
+                    <field name="number_of_days" attrs="{'invisible':[('depend_on_age','=',True)]}"/>
+                    <field name="depend_on_age"/>
+                    <field name="number_of_days_more_than_50_year" attrs="{'invisible':[('depend_on_age','=',False)]}"/>
+                    <field name="number_of_days_less_than_50_year" attrs="{'invisible':[('depend_on_age','=',False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="leave_type_form_inherit" model="ir.ui.view">
+            <field name="name">leave_type_form_inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="consume_weekends"/>
+                    <field name="required_attachment"/>
+                    <field name="hr_validation"/>
+                    <!--                    <field name="work_from_home"/>-->
+                    <field name="maternity_leave"/>
+                    <field name="compassionate_leave"/>
+                    <field name="pilgrimage_leave"/>
+                    <field name="military_service"/>
+                    <field name="annual_leave"/>
+                    <field name="casual_leave"/>
+                    <field name="marriage_leave"/>
+                    <field name="days_off"/>
+                    <!--                    <field name="consecutive_days_per_month"/>-->
+                    <!--                    <field name="not_allowed_consecutive_types" widget="many2many_tags"/>-->
+                    <label for="submit_after" string="Allow Submitting After Request Date By"/>
+                    <div class="o_row o_row_readonly">
+                        <field name="submit_after" class="oe_inline" nolabel="1"/>
+                        <span class="oe_inline font-weight-bold">
+                            Days
+                        </span>
+                    </div>
+                    <label for="submit_before" string="Allow Submitting Before Request Date By Days"/>
+                    <div class="o_row o_row_readonly">
+                        <field name="submit_before" class="oe_inline" nolabel="1"/>
+                        <span class="oe_inline font-weight-bold">
+                            Days
+                        </span>
+                    </div>
+
+                    <label for="submit_5days_before"
+                           string="Allow Submitting (5 Days Or More) Before Request Date By Days"/>
+                    <div class="o_row o_row_readonly">
+                        <field name="submit_5days_before" class="oe_inline" nolabel="1"/>
+                        <span class="oe_inline font-weight-bold">
+                            Days
+                        </span>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='responsible_id']" position="replace">
+                    <field name="responsible_id" domain="[('share', '=', False)]"
+                           attrs="{
+                                'invisible': [('leave_validation_type', 'in', ['no_validation', 'manager']), '|', ('requires_allocation', '=', 'no'), ('allocation_validation_type', '!=', 'officer')]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='leave_validation_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_requests']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='allocation_validation_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='support_document']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='overtime_deductible']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

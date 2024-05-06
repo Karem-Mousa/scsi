@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_job_offer_customer_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <br/>
+                    <center>
+                        <h2 class="mt16">
+                            OFFER LETTER
+                        </h2>
+                    </center>
+                    <div class="row">
+                        <div class="col-2">
+<!--                            Dear<span t-field="doc.employee_id"/>,-->
+                            Dear<span t-field="doc.emp_name"/>,
+                        </div>
+                        <div class="col-8"/>
+                        <div class="col-3 mb4">
+                            Date:
+                            <span t-field="doc.offer_date"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <span t-field="doc.note"/>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_job_offer_customer_forma">
+            <t t-call="web.html_container">
+                <t t-set="is_pro_forma" t-value="True"/>
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="job_offer_applicant_employee.report_job_offer_customer_document"/>
+                </t>
+            </t>
+        </template>
+
+        <!-- <report
+            id="action_report_job_offer_customer"
+            string="Offer Letter "
+            model="job.offer.customer"
+            report_type="qweb-pdf"
+            file="job_offer_applicant_employee.report_job_offer_customer_forma"
+            name="job_offer_applicant_employee.report_job_offer_customer_forma"
+            print_report_name="object.name"
+        /> -->
+        <record id="action_report_job_offer_customer" model="ir.actions.report">
+            <field name="name">Offer Letter</field>
+            <field name="model">job.offer.customer</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">job_offer_applicant_employee.report_job_offer_customer_forma</field>
+            <field name="report_file">job_offer_applicant_employee.report_job_offer_customer_forma</field>
+            <field name="binding_model_id" ref="job_offer_applicant_employee.model_job_offer_customer"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

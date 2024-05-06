@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="excel_hr_employee_insurance_form_inherit" model="ir.ui.view">
+            <field name="name">excel_hr_employee_insurance_form_inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="ent_hr_insurance.hr_employee_insurance_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='insurance']" position="attributes">
+                    <attribute name="groups">excellence_hr_insurance_inherit.excel_group_hr_insurance</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='insurance']" position="after">
+                    <label for="x_employee_relations" string="Family Insurance"/>
+                    <field name="x_employee_relations">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="relation"/>
+                        </tree>
+                    </field>
+                </xpath>
+
+                <xpath expr="//page[@name='insurance']/group[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <field name="insurance" position="replace">
+                    <field name="insurance" widget="one2many_list" colspan="4" nolabel="1" mode="tree">
+                        <tree string="insurance Items">
+                            <field name="employee_id"/>
+                            <field name="policy_id"/>
+                            <field name="sum_insured"/>
+                            <field name="amount"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.menu" id="ent_hr_insurance.hr_employee_insurance_menu">
+            <field name="groups_id" eval="[(6,0,[ref('excellence_hr_insurance_inherit.excel_group_hr_insurance')])]"/>
+            <field name="parent_id" ref="excellence_hr_insurance_inherit.excel_hr_insurance_menu"/>
+        </record>
+    </data>
+</odoo>

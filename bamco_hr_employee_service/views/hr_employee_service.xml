@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+       <record id="employee_service_time_off" model="ir.actions.act_window">
+           <field name="name">Employee Service</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">hr.leave</field>
+           <field name="view_mode">tree,form</field>
+       </record>
+
+        <record id="employee_service_loan" model="ir.actions.act_window">
+           <field name="name">Loans</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">hr.loan</field>
+           <field name="view_mode">tree,form</field>
+       </record>
+
+        <record id="employee_service_excuse" model="ir.actions.act_window">
+           <field name="name">Excuses</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">hr.excuse</field>
+           <field name="view_mode">tree,form</field>
+       </record>
+
+        <record id="employee_service_mission" model="ir.actions.act_window">
+           <field name="name">Mission</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">hr.mission</field>
+           <field name="view_mode">tree,form</field>
+       </record>
+
+        <menuitem id="employee_self_service" name="Employee Service" action="employee_service_time_off"/>
+<!--        <menuitem id="employee_self_service_leave" name="Time Off" action="employee_service_time_off" parent="bamco_hr_employee_service.employee_self_service"/>-->
+<!--        <menuitem id="employee_self_service_loan" name="Loans" action="employee_service_loan" parent="bamco_hr_employee_service.employee_self_service"/>-->
+<!--        <menuitem id="employee_self_service_excuse" name="Excuse" action="employee_service_excuse" parent="bamco_hr_employee_service.employee_self_service"/>-->
+<!--        <menuitem id="employee_self_service_mission" name="Mission" action="employee_service_mission" parent="bamco_hr_employee_service.employee_self_service"/>-->
+    </data>
+</odoo>

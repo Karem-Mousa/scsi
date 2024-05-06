@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="excellence_tenders_minutes_form_inherit" model="ir.ui.view">
+            <field name="name">excellence.tenders.minutes.form.inherit</field>
+            <field name="model">excellence.tenders.minutes</field>
+            <field name="inherit_id" ref="excellences_tenders_minutes.excellence_tenders_minutes_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_open_print_wiz" class="btn-primary" type="object"
+                                string="طباعة محضر العروض"/>
+                         <button name="action_open_print_draft_wiz" class="btn-primary" type="object"
+                                string="طباعة التعميد"/>
+                    </header>
+                </xpath>
+
+                <xpath expr="//field[@name='vendor_id']" position="after">
+                    <field name="date" string="تاريخ" required="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

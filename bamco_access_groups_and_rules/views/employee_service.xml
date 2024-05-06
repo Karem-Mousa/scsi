@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="centione_employee_loans_no_edit_form_inherit" model="ir.ui.view">
+            <field name="name">centione.employee.loans.no.edit.form.inherit</field>
+            <field name="model">hr.loan</field>
+            <field name="inherit_id" ref="bamco_hr_loan_correct.loan_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="centione_employee_time_off_no_edit_form_inherit" model="ir.ui.view">
+            <field name="name">centione.employee.time.off.no.edit.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="centione_employee_time_off_alt_no_edit_form_inherit" model="ir.ui.view">
+            <field name="name">centione.employee.time.off.alt.no.edit.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="bamco_hr_reports.leave_report_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='alt_employee_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="centione_employee_mission_no_edit_form_inherit" model="ir.ui.view">
+            <field name="name">centione.employee.mission.no.edit.form.inherit</field>
+            <field name="model">hr.mission</field>
+            <field name="inherit_id" ref="bamco_hr_self_service.view_hr_mission_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="centione_employee_excuse_no_edit_form_inherit" model="ir.ui.view">
+            <field name="name">centione.employee.excuse.no.edit.form.inherit</field>
+            <field name="model">hr.excuse</field>
+            <field name="inherit_id" ref="bamco_hr_self_service.view_hr_excuse_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True,'no_quick_create':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="annual_salary_statement" model="ir.ui.view">
+            <field name="name">annual.salary.statement</field>
+            <field name="model">annual.salary.statement</field>
+            <field name="arch" type="xml">
+                <form string="Annual Salary Statement">
+                    <sheet>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+<!--                            <field name="duration"/>-->
+                            <field name="employee_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="generate_xlsx_report" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" type="special" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="annual_salary_statement_button" model="ir.ui.view">
+            <field name="name">annual.salary.statement.button</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                        <button name="action_annual_salary_statement" string="الكشف السنوى للرواتب" type="object" class="oe_highlight"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="excel_base_view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">excel_base_view_partner_form_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="vendor_attachment" string="Vendor Attachment">
+                        <group>
+                            <group>
+                                <field name="x_commercial_register" nolabel="0"/>
+                                <field name="x_commercial_register_date" nolabel="0"/>
+                                <field name="x_commercial_register_num" nolabel="0"/>
+                            </group>
+
+                            <group>
+                                <field name="x_commercial_chamber_certificate"/>
+                                <field name="x_commercial_chamber_certificate_date"/>
+                                <field name="x_commercial_chamber_certificate_num"/>
+                            </group>
+
+                            <group>
+                                <field name="x_zakat_certificate"/>
+                                <field name="x_zakat_certificate_date"/>
+                                <field name="x_zakat_certificate_num"/>
+                            </group>
+
+                            <group>
+                                <field name="x_social_insurance_certificate"/>
+                                <field name="x_social_insurance_certificate_date"/>
+                                <field name="x_social_insurance_certificate_num"/>
+                            </group>
+
+                            <group>
+                                <field name="x_saudization_certificate"/>
+                                <field name="x_saudization_certificate_date"/>
+                                <field name="x_saudization_certificate_num"/>
+                            </group>
+
+                            <group>
+                                <field name="x_tax_certificate"/>
+                            </group>
+                            <group>
+                                <field name="x_iban_certificate"/>
+                                <field name="x_iban_number"/>
+                                <field name="x_iban_bank"/>
+                            </group>
+
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

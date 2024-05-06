@@ -1,0 +1,247 @@
+<odoo>
+    <data>
+
+        <record id="paperformat_resignation" model="report.paperformat">
+            <field name="name">Resignation A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">24</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <template id="resignation_document">
+            <t t-call="web.basic_layout">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="/bamco_resignation/static/img/Logo.png"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <img src="/bamco_resignation/static/img/footer2.png" style="width: 100%"/>
+                </div>
+                <div class="page" style="height:100px; padding-top:20 px;font-size: 10px;">
+
+                    <div class="oe_title">
+                        <h2 align="center" style="font-size: 20px;bold;">اسـتـقـالـة</h2>
+                    </div>
+                    <table class="table table-bordered" style="border-color:black;" dir="rtl" width="100%">
+                        <tr col="12">
+                            <tr>
+                                <th style="background-color:#d9d9d9; font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">
+                                    <span t-esc="datetime.date.today()"/>
+                                    التاريخ
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr colspan="12">
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">الى إدارة
+                                    الموارد البشرية
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">أنا
+                                    السيد / ة
+                                    :
+                                    <span t-field="docs.employee_id.name"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">المسمى
+                                    الوظيفي:
+                                    <span t-field="docs.job_position"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">الرقم
+                                    الوظيفي:
+                                    <span t-field="docs.employee_number"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">رقم الجوال:
+                                    <span t-field="docs.phone"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">تاريخ
+                                    التعيين:
+                                    <span t-field="docs.employment_date"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12" class="text-right">موقع
+                                    العمل:
+                                    <span t-field="docs.address_id"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="background-color:#d9d9d9; font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">إفادة
+                                    بالاستقالة
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th colspan="12" class="text-center">أود افادتكم في انني لا أستطيع اكمال خدمتي في شركتكم
+                                    الموقرة بامكو ويعتبر هذا الخطاب
+                                    بمثابة
+                                    • استقالتي من الشركة.
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th colspan="12" class="text-center">
+                                    وأن اخر يوم عمل لي بتاريخ
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th colspan="12" class="text-center">
+                                    <span t-esc="docs.last_work_day"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="background-color:#d9d9d9; font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">الأسباب
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th colspan="12" class="text-center">
+                                    <span t-esc="docs.reason"/>
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="background-color:#d9d9d9; font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">الاجراءات
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <div rowspan="3">
+                                <td>
+<!--                                    <span t-esc="docs.process"/>-->
+                                </td>
+                            </div>
+                            <div rowspan="3">
+                                <td class="text-center">
+                                    <span t-esc="docs.notes"/>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr colspan="12" style="margin-bottom: 20px;">
+                            <th colspan="6" class="text-right">التوقيع :</th>
+                            <th colspan="6" class="text-right">التاريخ / / م
+                            </th>
+                        </tr>
+                        <tr col="12">
+                            <tr colspan="12" style="background-color:#d9d9d9; font-weight: bold; color: #000000;">
+                                <th colspan="6" class="text-right">اعتماد مدير الادارة
+                                    <div class="col-xs-12">
+                                        <label>
+                                            موافق
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th colspan="6" class="text-right">
+                                    <div class="col-xs-12">
+                                        <label>
+                                            غير موافق
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </div>
+
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">التوصيات:
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr colspan="12">
+                                <th colspan="6" class="text-right">التوقيع :</th>
+                                <th colspan="6" class="text-right">التاريخ:
+                                </th>
+                            </tr>
+                        </tr>
+                        <tr col="12">
+                            <tr>
+                                <th style="font-weight: bold; color: #000000;" colspan="12"
+                                    class="text-right">ملاحظات شؤون الموظفين:
+                                </th>
+                            </tr>
+                        </tr>
+                    </table>
+                    <p>
+                        وقد قدمت هذه الشهادة بناء على طلبه دون ادنى مسئولية على الشركة
+
+                        وتفضلوا بقبول فائق الاحترام،
+                    </p>
+                    <p>مدير إدارة الموارد البشرية</p>
+                    <p>محمد بن يحيى الغزواني</p>
+                </div>
+            </t>
+        </template>
+
+
+        <record id="bamco_resignation_report" model="ir.actions.report">
+            <field name="name">استقالة</field>
+            <field name="model">hr.resignation.req</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bamco_resignation.resignation_document</field>
+            <field name="report_file">bamco_resignation.resignation_document</field>
+            <field name="print_report_name">(object.employee_id.name or 'استقالة').replace('/','_')</field>
+            <field name="paperformat_id" ref="bamco_resignation.paperformat_resignation"/>
+            <field name="binding_model_id"
+                   ref="bamco_resignation.model_hr_resignation_req"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

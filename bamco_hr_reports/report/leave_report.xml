@@ -1,0 +1,305 @@
+<odoo>
+    <data>
+        <report
+                id="bamco_hr_leave"
+                model="hr.leave"
+                string="Leave Print"
+                report_type="qweb-pdf"
+                menu="False"
+                name="bamco_hr_reports.report_bamco_leave"
+                file="bamco_hr_reports.report_bamco_leave"
+        />
+
+        <template id="bamco_header_footer">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <table style="">
+                    <tbody>
+                        <div class="row">
+                            <div class="text-left col-6">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height: 100px;"
+                                     alt="Logo"/>
+                            </div>
+                            <div class="text-right col-6">
+                                <span dir="rtl">تاريخ طلب الاجازة:</span>
+                                <span dir="rtl" t-esc="o.create_date.date()"></span>
+                                <br/>
+                                <span dir="rtl">رقم الاجازة:</span>
+                                <span dir="rtl" t-esc="o.code"></span>
+                            </div>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="footer o_background_footer">
+                <table style="">
+                    <tbody>
+                        <div class="row">
+                            <div class="text-left col-6">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                     style="height: 100px;"
+                                     alt="Logo"/>
+                            </div>
+                            <div class="text-right col-6">
+                                <span dir="rtl" t-esc="o.employee_id.company_id.phone"></span>
+                                <br/>
+                                <span dir="rtl" t-esc="o.employee_id.company_id.mobile"></span>
+                                <br/>
+                                <span dir="rtl" t-esc="o.employee_id.company_id.email"></span>
+                                <br/>
+                                <span dir="rtl" t-esc="o.employee_id.company_id.website"></span>
+                            </div>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template id="report_bamco_leave_document">
+            <t t-call="bamco_hr_reports.bamco_header_footer"/>
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="text-center" style="font-size:25px">
+                        طلب الاجازة
+                    </div>
+                    <br/>
+                    <div class="text-center">
+                        <div class="text-center" style="font-size:20px">
+                            معلومات الموظف
+                        </div>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div t-if="o.employee_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">اسم الموظف:
+                                </div>
+                                <div t-if="o.employee_id.attendance_id_char"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الرقم الوظيفي:
+                                </div>
+                                <div t-if="o.employee_id.job_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">المسمي الوظيفي:
+                                </div>
+                                <div t-if="o.employee_id.country_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الجنسية:
+                                </div>
+                                <div t-if="o.employee_id.department_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الادارة:
+                                </div>
+                                <!--                                <div>الموقع</div>-->
+                            </div>
+                            <div class="col-6">
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.name" t-esc="o.employee_id.name"></div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.attendance_id_char"
+                                     t-esc="o.employee_id.attendance_id_char"></div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.job_id.name" t-esc="o.employee_id.job_id.name"></div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.country_id.name" t-esc="o.employee_id.country_id.name"></div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.department_id.name"
+                                     t-esc="o.employee_id.department_id.name"></div>
+                                <!--                                <div t-esc="o.employee_id.name"></div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-center" style="font-size:20px">
+                            تفاصيل الاجازة
+                        </div>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div t-if="o.holiday_status_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">نوع الاجازة:
+                                </div>
+                                <div t-if="o.request_date_from"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">من:
+                                </div>
+                                <div t-if="o.request_date_to"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الي:
+                                </div>
+                                <div t-if="o.employee_id.mobile_phone"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">جوال:
+                                </div>
+                                <div t-if="o.employee_id.work_phone"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">هاتف:
+                                </div>
+                                <div t-if="o.number_of_days"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">عدد أيام الاجازة:
+                                </div>
+                                <div t-if="o.employee_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">اسم و توقيع
+                                    الموظف:
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div t-if="o.holiday_status_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.holiday_status_id.name"></div>
+                                <div t-if="o.request_date_from"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.request_date_from"></div>
+                                <div t-if="o.request_date_to"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.request_date_to"></div>
+                                <div t-if="o.employee_id.mobile_phone"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.employee_id.mobile_phone"></div>
+                                <div t-if="o.employee_id.work_phone"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.employee_id.work_phone"></div>
+                                <div t-if="o.number_of_days"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.number_of_days"></div>
+                                <div t-if="o.employee_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.employee_id.name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" t-if="o.alt_employee_id">
+                        <div class="text-center" style="font-size:20px">
+                            الموظف البديل
+                        </div>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div t-if="o.alt_employee_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الاسم:
+                                </div>
+                                <div t-if="o.alt_employee_id.attendance_id_char"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">الرقم الوظيفي:
+                                </div>
+                                <!--                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">التوقيع:</div>-->
+                                <div t-if="o.alt_employee_id.coach_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">توقيع المدير
+                                    المباشر:
+                                </div>
+                                <div t-if="o.alt_employee_id.parent_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">توقيع مدير
+                                    الادارة:
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div t-if="o.alt_employee_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.alt_employee_id.name"></div>
+                                <div t-if="o.alt_employee_id.attendance_id_char"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.alt_employee_id.attendance_id_char"></div>
+                                <!--                                <div t-esc="o.request_date_to"></div>-->
+                                <div t-if="o.alt_employee_id.coach_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.alt_employee_id.coach_id.name"></div>
+                                <div t-if="o.alt_employee_id.parent_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.alt_employee_id.parent_id.name"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-center" style="font-size:20px">
+                            تعبا من قبل شؤن الموظفين
+                        </div>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div t-if="o.employee_id.contract_id.sudo().date_start"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">تاريخ التعيين:
+                                </div>
+                                <div t-if="o.employee_id.iqama_end_date"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">تاريخ انتهاء
+                                    الاقامة:
+                                </div>
+                                <div t-if="o.request_date_from"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">تاريخ استحقاق
+                                    الاجازة:
+                                </div>
+                                <!--                                <div>عدد ايام الاجازة المتبقية:</div>-->
+                                <div t-if="o.return_from_leave"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">تاريخ العودة من
+                                    الاجازة:
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div t-if="o.employee_id.contract_id.date_start"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.employee_id.contract_id.date_start"></div>
+                                <div t-if="o.employee_id.iqama_end_date"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.employee_id.iqama_end_date"></div>
+                                <div t-if="o.request_date_from"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.request_date_from"></div>
+                                <!--                                <div t-esc="o.employee_id.coach_id.name"></div>-->
+                                <div t-if="o.return_from_leave"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-esc="o.return_from_leave"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-center" style="font-size:20px">
+                            توقيع شوؤن الموظفين
+                        </div>
+                        <br/>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div t-if="o.employee_id.parent_id.name"
+                                     style="width:100%; border: 1px solid;border-collapse: collapse;">التوقيع:
+                                </div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">التاريخ:</div>
+                            </div>
+                            <div class="col-6">
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                     t-if="o.employee_id.parent_id.name" t-esc="o.employee_id.parent_id.name"></div>
+                                <!--                                <div t-esc="o.employee_id.iqama_end_date"></div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-center" style="font-size:20px">
+                            اعتماد مدير الموارد البشرية
+                        </div>
+                        <br/>
+                        <div dir="rtl" class="row">
+                            <div dir="rtl" class="col-6">
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">نعم:</div>
+                                <br/>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">لا:</div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">التوقيع:</div>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;">التاريخ:</div>
+                            </div>
+                            <div class="col-6">
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;height: 20px; width: 20px;background-color: #D0D0D0;"
+                                     class="square"></div>
+                                <br/>
+                                <div style="width:100%; border: 1px solid;border-collapse: collapse;height: 20px; width: 20px;background-color: #D0D0D0;"
+                                     class="square"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_bamco_leave">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bamco_hr_reports.report_bamco_leave_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

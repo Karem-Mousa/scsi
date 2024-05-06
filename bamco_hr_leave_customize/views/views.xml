@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="new_manager_approve_view" model="ir.ui.view">
+            <field name="name">new_manager_approve_view</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm']" position="replace">
+                    <button string="Confirm" name="action_confirm" states="confirm" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

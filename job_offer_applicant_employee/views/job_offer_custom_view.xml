@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="custom_job_offer_customer_form_view" model="ir.ui.view">
+            <field name="name">job.offer.customer.form</field>
+            <field name="model">job.offer.customer</field>
+            <field name="arch" type="xml">
+                <form string="Job Offer Customer">
+                    <header>
+                        <button name="action_in_progress"
+                                string="In Progress" states="new" class="btn-primary" type="object"/>
+                        <button name="action_give_to_employee" states="in_progress" class="btn-primary" type="object"
+                                string="Give to Employee"/>
+                        <button name="action_done" states="given_to_employee" class="btn-primary" type="object"
+                                string="Done"/>
+                        <button name="action_cancel" states="new" type="object" string="Cancel"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="new,in_progress,given_to_employee,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="application_id" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                                <field name="monthly_salary" class="oe_subtotal_footer_separator" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"
+                                       attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                                <field name="company_id" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                            </group>
+                            <group>
+                                <!--                                <field name="employee_id" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>-->
+                                <field name="emp_name"/>
+                                <field name="offer_date" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                                <field name="prepaid_by" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                                <field name="prepaid_date" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                                <field name="currency_id" invisible="1"
+                                       attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="terms_and_conditions" string="Body">
+                                <field name="note" nolabel="1" attrs="{'readonly': [('state', 'not in', ['new'])]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="custom_job_offer_customer_tree" model="ir.ui.view">
+            <field name="name">job.offer.customer.tree</field>
+            <field name="model">job.offer.customer</field>
+            <field name="arch" type="xml">
+                <tree string="Job Offer Customer">
+                    <field name="name"/>
+                    <!--                    <field name="employee_id"/>-->
+                    <field name="emp_name"/>
+                    <field name="application_id"/>
+                    <field name="offer_date"/>
+                    <field name="company_id"/>
+                    <field name="monthly_salary"/>
+                    <field name="state"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_custom_job_offer_customer" model="ir.actions.act_window">
+            <field name="name">Job Offers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.offer.customer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

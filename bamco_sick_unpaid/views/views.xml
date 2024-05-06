@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="sick_leave_salary_rule" model="hr.salary.rule">
+            <field name="name">Sick leave</field>
+            <field name="sequence" eval="48"/>
+            <field name="code">SICK</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = employee.get_sick_leaves(payslip)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.get_sick_leaves(payslip)
+            </field>
+        </record>
+
+<!--        <record id="unpaid_leave_salary_rule" model="hr.salary.rule">-->
+<!--            <field name="name">Unpaid</field>-->
+<!--            <field name="sequence" eval="49"/>-->
+<!--            <field name="code">UNPAIDLEAVE</field>-->
+<!--            <field name="category_id" ref="hr_payroll.DED"/>-->
+<!--            <field name="struct_id" ref="stc_hr_payroll_base.custom_default_payroll_structure"/>-->
+<!--            <field name="condition_select">python</field>-->
+<!--            <field name="condition_python">result = employee.get_unpaid_leaves(payslip)-->
+<!--            </field>-->
+<!--            <field name="amount_select">code</field>-->
+<!--            <field name="amount_python_compute">result = employee.get_unpaid_leaves(payslip)-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

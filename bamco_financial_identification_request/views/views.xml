@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+        <record id="financial_identification_request_view_tree" model="ir.ui.view">
+            <field name="name">financial_identification_request_view_tree</field>
+            <field name="model">financial.identification.request</field>
+            <field name="arch" type="xml">
+                <tree string="financial_identification_request_view_tree">
+                    <field name="to"/>
+                    <field name="employee_id"/>
+                    <field name="employee_number"/>
+                </tree>
+            </field>
+        </record>
+        <record id="managerial_identification_request_view_tree" model="ir.ui.view">
+            <field name="name">managerial_identification_request_view_tree</field>
+            <field name="model">managerial.identification.request</field>
+            <field name="arch" type="xml">
+                <tree string="managerial_identification_request_view_tree">
+                    <field name="to"/>
+                    <field name="employee_id"/>
+                    <field name="employee_number"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="financial_identification_request_view_form" model="ir.ui.view">
+            <field name="name">financial_identification_request_view_form</field>
+            <field name="model">financial.identification.request</field>
+            <field name="arch" type="xml">
+                <form string="financial_identification_request_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="to"/>
+                                <field name="employee_id"/>
+                                <field name="employee_number"/>
+                                <field name="employment_date"/>
+                                <field name="department_id"/>
+                            </group>
+                            <group>
+                                <field name="id_number"/>
+                                <field name="passport_number"/>
+                                <field name="nationality"/>
+                                <field name="job_position"/>
+
+                            </group>
+                        </group>
+                        <group>
+                            <field name="basic_salary"/>
+                            <field name="housing_allowance"/>
+                            <field name="other_allowance"/>
+                            <field name="total"/>
+                            <field name="bank"/>
+                            <field name="bank_number"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="managerial_identification_request_view_form" model="ir.ui.view">
+            <field name="name">managerial_identification_request_view_form</field>
+            <field name="model">managerial.identification.request</field>
+            <field name="arch" type="xml">
+                <form string="managerial_identification_request_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="to"/>
+                                <field name="employee_id"/>
+                                <field name="employee_number"/>
+                                <field name="employment_date"/>
+                                <field name="department_id"/>
+                            </group>
+                            <group>
+                                <field name="id_number"/>
+                                <field name="passport_number"/>
+                                <field name="nationality"/>
+                                <field name="job_position"/>
+
+                            </group>
+                        </group>
+<!--                        <group>-->
+<!--                            <field name="basic_salary"/>-->
+<!--                            <field name="housing_allowance"/>-->
+<!--                            <field name="other_allowance"/>-->
+<!--                            <field name="total"/>-->
+<!--                            <field name="bank"/>-->
+<!--                            <field name="bank_number"/>-->
+<!--                        </group>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="financial_identification_request_action" model="ir.actions.act_window">
+            <field name="name">طلب التعريف المالى</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">financial.identification.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="managerial_identification_request_action" model="ir.actions.act_window">
+            <field name="name">طلب التعريف الإداري</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">managerial.identification.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="financial_identification_request_menu" name="طلب التعريف المالى"
+                  parent="bamco_hr_employee_service.employee_self_service"
+                  action="financial_identification_request_action"/>
+<!--        <menuitem id="managerial_identification_request_menu" name="طلب التعريف الإداري"-->
+<!--                  parent="bamco_hr_employee_service.employee_self_service"-->
+<!--                  action="managerial_identification_request_action"/>-->
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_financial_identification_request,access_financial_identification_request,model_financial_identification_request,,1,1,1,1
+access_managerial_identification_request,access_managerial_identification_request,model_managerial_identification_request,,1,1,1,1

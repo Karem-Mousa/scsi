@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="branch_form_view_emp" model="ir.actions.act_window">
+            <field name="name">HR Branch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.branch</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="hr_branch_menu" name="branch" parent="hr.menu_human_resources_configuration"
+                  action="branch_form_view_emp" sequence="101"/>
+    </data>
+</odoo>

@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <record id="financial_identification_request_form_cycle_approve" model="ir.ui.view">
+            <field name="name">financial.identification.request.form.cycle.approve</field>
+            <field name="model">financial.identification.request</field>
+            <field name="inherit_id"
+                   ref="bamco_financial_identification_request.financial_identification_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <field name="dep_manager" invisible="1"/>
+                        <field name="is_validation_user" invisible="1"/>
+                        <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'draft'),('dep_manager', '!=', uid)]&quot;}"/>
+
+                        <button name="action_validate" type="object" string="Validate" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+
+                        <button name="action_refuse" type="object" string="Refuse" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+                        <button name="print_report" type="object" string="نموذج طلب إداري" states="validated"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,validated"/>
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='bank_number']" position="after">
+                    <field name="comment" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="managerial_identification_request_form_cycle_approve" model="ir.ui.view">
+            <field name="name">managerial.identification.request.form.cycle.approve</field>
+            <field name="model">managerial.identification.request</field>
+            <field name="inherit_id"
+                   ref="bamco_financial_identification_request.managerial_identification_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <field name="dep_manager" invisible="1"/>
+                        <field name="is_validation_user" invisible="1"/>
+                        <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'draft'),('dep_manager', '!=', uid)]&quot;}"/>
+
+                        <button name="action_validate" type="object" string="Validate" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+
+                        <button name="action_refuse" type="object" string="Refuse" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+                        <button name="print_report" type="object" string="نموذج طلب إداري" states="validated"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,validated"/>
+                    </header>
+                </xpath>
+<!--                <xpath expr="//field[@name='bank_number']" position="after">-->
+<!--                    <field name="comment" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="bamco_financial_identification_request.financial_identification_request_report"
+                model="ir.actions.report">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+        <record id="bamco_financial_identification_request.managerial_identification_request_report"
+                model="ir.actions.report">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

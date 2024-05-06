@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="admin_req_group" model="ir.module.category">
+            <field name="name">Admin Request Groups</field>
+        </record>
+
+        <record id="validation_group" model="res.groups">
+            <field name="name">Validation Group</field>
+            <field name="category_id" ref="admin_req_group"/>
+        </record>
+
+    </data>
+</odoo>

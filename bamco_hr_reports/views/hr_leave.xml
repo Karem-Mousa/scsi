@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="leave_report_form_inherit" model="ir.ui.view">
+            <field name="name">leave.report.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="generate_qweb_report" string="Print Leave Report" type="object"
+                            class="btn-primary" attrs="{'invisible':[('state','!=','validate')]}"/>
+                    <field name="code" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="alt_employee_id" attrs="{'required':[('number_of_days','&gt;',2)]}"/>
+                    <field name="return_from_leave"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

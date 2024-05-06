@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_ex_tender_report" model="report.paperformat">
+            <field name="name">EX Tender Paperformat</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">60</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">60</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="custom_footer">
+            <img src="/excellence_tender_report/static/src/img/footer.jpg" style="width: 100%"/>
+        </template>
+        <template id="custom_header">
+            <div class="header" style="max-width: 100%">
+                <hr style="border: 12px solid #075f4a;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;"/>
+                <div class="row text-center" style="color: #075f4a;">
+                    <div class="col-4">
+                        <h5 style="font-weight: 100;">
+                            Kingdome of Saudi Arabia
+                            <br/>
+                            Ministry of Education
+                            <br/>
+                            Shaqra University
+                            <br/>
+                            Studies &amp; Consulting Services Institute
+                            <br/>
+                            (045)
+                        </h5>
+                    </div>
+                    <div class="col-4">
+                        <img src="/excellence_tender_report/static/src/img/img.png"/>
+                    </div>
+                    <div class="col-4">
+                        <h5 style="font-weight: 100;" dir="rtl">
+                            المملكة العربية السعودية
+                            <br/>
+                            وزارة التعليم
+                            <br/>
+                            جامعة شقراء
+                            <br/>
+                            معهد الدراسات والخدمات الاستشارية
+                            <br/>
+                            (045)
+                        </h5>
+                    </div>
+                </div>
+
+                <br/>
+
+                <!--
+                                <div class="row text-center" style="color: #075f4a" dir="rtl">
+                                    <div class="col-4">
+                                        <span>
+                                            الرقم:
+                                            <div style="border-bottom: 1px dotted #075f4a;width:30%;display:inline-block"/>
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        التاريخ:
+                                        <span t-esc="datetime.date.today()"/>
+                                    </div>
+                                    &lt;!&ndash;
+                                                        <div class="col-4">
+                                                            <span>
+                                                                المرفقات :
+                                                                <div style="border-bottom: 1px dotted #075f4a;width:30%;display:inline-block"/>
+                                                            </span>
+                                                        </div>
+                                    &ndash;&gt;
+                                </div>
+                -->
+            </div>
+        </template>
+
+
+        <template id="external_layout_inherit" inherit_id="web.external_layout_standard">
+            <xpath expr="//div" position="replace">
+                <t t-call="excellence_tender_report.custom_header"/>
+            </xpath>
+        </template>
+        <template id="internal_layout_inherit" inherit_id="web.internal_layout">
+            <xpath expr="//div[@class='header']" position="replace">
+                <t t-call="excellence_tender_report.custom_header"/>
+            </xpath>
+        </template>
+        <template id="internal_layout_s_inherit" inherit_id="web.external_layout_standard">
+            <xpath expr="//div[@t-field='company.report_footer']/../.." position="replace">
+                <t t-call="excellence_tender_report.custom_footer"/>
+            </xpath>
+        </template>
+
+        <template id="ex_report_temp">
+            <div class="page text-right" dir="rtl" style="font-family: 'Cairo'">
+                <h4>
+                    <h4 style="margin-top:-30px">
+                        رقم التعميد:
+                        <span t-esc="rec.name"/>
+                    </h4>
+                    السادة/
+                    <span t-esc="rec.selected_company.name"/>
+                    سلمهم الله
+                    <br/>
+                    العنوان:
+                    <span t-esc="rec.selected_company.street"/>
+
+                    <br/>
+                    رقم المنشأة:
+                    <span t-esc="no_facility"/>
+                    <br/>
+                    السلام عليكم ورحمة الله وبركاته
+                </h4>
+
+                <t t-set="selected_line"
+                   t-value="rec.tender_minute_lines_ids.filtered(lambda x: x.vendor_id == rec.selected_company and x.awarded)"/>
+                <p style="font-size: 20px; margin-top: 3em">
+                    إشارة لعرضكم المقدم بتاربخ
+                    <span t-esc="selected_line.date"/>
+                    بشأن
+                    <span t-esc="rec.project_name"/>
+                    لمدة
+                    <span t-esc="period_no"/>
+                    <span t-esc="period_type"/>
+
+                    اعتبارا من تاريخ محضر مباشرة الأعمال وحيث عرضكم مطابق للمواصفات والشروط المطلوبة.
+                    <br/>
+                    عليه اعتمدوا ذلك طبقا للمواصفات والشروط المطلوبة وذلك مقابل مبلغ إجمالي وقدر
+                    (<span t-esc="rec.selected_company_tender_amount"/>)
+                    <span t-esc="rec.num2letter(rec.selected_company_tender_amount)"/>
+                    شاملة جميع المصاريف والرسوم والضرائب.
+                </p>
+
+                <t t-if="rec.selected_company_tender_amount>99999">
+                    <ul style="margin-right: 5px">
+                        <li>
+                            هذا التعميد لا يترتب عليه أي التزام نظامي أو مالي على المعهد إلا بعد توقيع العقد من الطرفين.
+                        </li>
+                    </ul>
+                </t>
+                <h3 class="text-center">
+                    متمنين لكم التوفيق ،،،
+                </h3>
+
+                <div class="row text-center" dir="ltr">
+                    <div class="col-4">
+                        عميد المعهد
+                        <br/>
+                        أ.د محمد بن لواح الرقاص
+                    </div>
+                </div>
+            </div>
+
+        </template>
+
+        <template id="ex_tender_report_temp">
+            <div class="page text-right" dir="rtl" style="font-family: 'Cairo'">
+                <div style="display: flex ;font-size: 20px;">
+                    <h4 style="margin-top:-30px">
+                        رقم المحضر:
+                        <span t-esc="rec.name"/>
+                    </h4>
+                    <table style="width:100%;text-align:center;">
+                        <tr style="background-color:#509565;border:1px solid black;">
+                            <td colspan="2" style="border: solid; padding:5px">
+                                <span style="color: white;">
+                                    محضر الترسية
+                                </span>
+                            </td>
+                        </tr>
+                        <tr style="border: solid;">
+                            <td style="width:30% ;border: solid;padding:5px">
+                                <span>
+                                    تاريخ المحضر
+                                </span>
+                            </td>
+                            <td style=" border: solid;padding:5px">
+                                <span t-esc="rec.tender_created_date"/>
+                            </td>
+                        </tr>
+                        <tr style="border: solid;">
+                            <td style="border: solid;width:30% ;padding:5px">
+                                <span>
+                                    اسم المشروع
+                                </span>
+                            </td>
+                            <td style=" border: solid;padding:5px">
+                                <span t-esc="rec.project_name"/>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid;">
+                            <td style="border: solid;width:30% ;padding:5px">
+                                <span>
+                                    مدة المشروع
+                                </span>
+                            </td>
+                            <td style="border: solid; padding:5px">
+                                <span t-esc="period_no"/>
+                                <span t-esc="period_type"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top:15px ;font-weight: medium;font-family: 'Cairo'">
+                        اجتمعت لجنة دراسة وفحص العروض المقدمة لمعهد الدراسات والخدمات الاستشارية بجامعة شقراء والمشكلة
+                        بقرار سعادة عميد المعهد رقم 44011162 المؤرخ في 09/16/ 1444هـ، وقامت اللجنة بالاطلاع على كافة
+                        وثائق العملية ، وكذلك العروض المقدمة من المتنافسين ودراستها من الناحية الفنية والمالية ، ومطابقة
+                        جميع العروض للشروط والمواصفات التي طرحت على أساسها العملية وتبين ما يلي :
+                    </div>
+
+                    <t t-set="companies"
+                       t-value="rec.tender_minute_lines_ids"/>
+                    <t t-set="table_length"
+                       t-value="int(len(rec.tender_minute_lines_ids))"/>
+                    <table style="border: solid;width:100%;text-align:center;margin-top:15px">
+                        <tr>
+                            <th colspan="5">
+                                الشركات المتقدمة
+                            </th>
+                        </tr>
+                        <tr style="border: solid;background-color:#509565;">
+                            <td style="border: solid;">
+                                <span style="color: white">أسماء الشركات</span>
+                            </td>
+                            <td style="border: solid;">
+                                <span style="color: white">قيمة العرض</span>
+                            </td>
+                            <td style="border: solid;">
+                                <span style="color: white">التقييم الفني</span>
+                            </td>
+                            <td style="border: solid;">
+                                <span style="color: white">التقييم المالى</span>
+                            </td>
+                            <td style="border: solid;">
+                                <span style="color: white">قوة الشركة</span>
+                            </td>
+                        </tr>
+
+                        <t t-foreach="companies" t-as="company">
+                            <tr style="border: solid;">
+                                <td style=" background-color:#509565; padding:5px">
+                                    <span style="color: white;" t-esc="company.vendor_id.name"/>
+                                </td>
+                                <td style=" border: solid;padding:5px">
+                                    <span t-esc="company.tender_amount"/>
+                                </td>
+                                <td style="border: solid; padding:5px">
+                                    <span t-esc="company.technical_evaluation"/>
+                                </td>
+                                <td style="border: solid; padding:5px">
+                                    <span t-esc="company.financial_evaluation"/>
+                                </td>
+                                <td style=" border: solid;padding:5px">
+                                    <span t-esc="company.company_strength"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+
+                    <div style="margin-top:15px">
+                        <table style="width:100%;text-align:center;">
+                            <tr style="border: solid;">
+                                <td style="width:20%;background-color:#509565;padding:5px">
+                                    <span style="color: white">التوصيات</span>
+                                </td>
+                                <td style=" padding:5px">
+                                    <span style="font-weight:500;">
+                                        وبناءً على ما ورد بأعلاه ، فقد تبين أن العرض المطابق فنيا وماليا هو عرض
+                                        <span t-esc="rec.selected_company.name"/>
+                                        بمبلغ
+                                        (<span t-esc="rec.selected_company_tender_amount"/>) ،
+                                        وعليه توصي اللجنة الفنية بالترسية عليها.
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <t t-set="signatures"
+                       t-value="rec.tender_users_signature_ids"/>
+                    <table style="border: solid;width:100%;text-align:center;">
+
+                        <tr style="border: solid;background-color:#509565;">
+                            <td colspan="4" style=" padding:5px">
+                                <span style="color: white">الموافقات</span>
+                            </td>
+                        </tr>
+                        <tr style="border: solid;">
+                            <td colspan="4" style=" padding:5px">
+                                <span>توقيع أعضاء اللجنة</span>
+                            </td>
+                        </tr>
+                        <tr style="border: solid;">
+                            <td style="border: solid;">الاسم</td>
+                            <td style="border: solid;">الصفة</td>
+                            <td style="border: solid;">التوقيع</td>
+                            <td style="border: solid;">ملاحظات</td>
+                        </tr>
+
+                        <t t-foreach="signatures" t-as="sig">
+                            <tr style="border: solid;">
+                                <td style="border: solid; padding:5px">
+                                    <span t-esc="sig.user_id.name"/>
+                                </td>
+                                <td style="border: solid; padding:5px">
+                                    <span t-esc="sig.user_job_position"/>
+                                </td>
+                                <td style="border: solid;">
+                                    <img t-att-src="'data:image/png;base64,%s' % to_text(sig.signature)"
+                                         style="max-height: 70px;"/>
+                                </td>
+                                <td style=" border: solid;padding:5px">
+                                </td>
+
+                            </tr>
+                        </t>
+
+
+                    </table>
+
+                </div>
+            </div>
+        </template>
+
+
+        <template id="ex_report_main_temp">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-set="rec" t-value="request.env['excellence.tenders.minutes'].browse(int(active_id))"/>
+                    <t t-if="type=='tender'">
+                        <t t-call="excellence_tender_report.ex_tender_report_temp"/>
+                    </t>
+                    <t t-else="">
+                        <t t-call="excellence_tender_report.ex_report_temp"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="ex_report_action" model="ir.actions.report">
+            <field name="name">EX Report</field>
+            <field name="model">ex.tender.report.wiz</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">excellence_tender_report.ex_report_main_temp</field>
+            <field name="report_file">excellence_tender_report.ex_report_main_temp</field>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_ex_tender_report"/>
+            <!--            <field name="paperformat_id" eval="False"/>-->
+        </record>
+
+    </data>
+</odoo>

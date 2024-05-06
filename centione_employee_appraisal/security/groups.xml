@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <record id="group_appraisal_hr" model="res.groups">
+            <field name="name">HR Appraisal</field>
+        </record>
+
+        <record id="group_see_contracts_emps" model="res.groups">
+            <field name="name">Show Employees And Contract</field>
+        </record>
+
+<!--        <record id="not_show_emps_rule" model="ir.rule">-->
+<!--            <field name="name">Not Show emps</field>-->
+<!--            <field name="model_id" ref="hr.model_hr_employee"/>-->
+<!--            <field name="groups_id" eval="[(4,ref('hr.group_hr_manager'))]"/>-->
+<!--            <field name="domain_force">[('user_id','=',user.id)]-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="not_show_contracts_rule" model="ir.rule">-->
+<!--            <field name="name">Not Show Contracts</field>-->
+<!--            <field name="model_id" ref="hr_contract.model_hr_contract"/>-->
+<!--            <field name="groups_id" eval="[(4,ref('hr_contract.group_hr_contract_manager'))]"/>-->
+<!--            <field name="domain_force">[('employee_id.user_id','=',user.id)]-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="show_contracts_rule" model="ir.rule">-->
+<!--            <field name="name">Show Contracts</field>-->
+<!--            <field name="model_id" ref="hr_contract.model_hr_contract"/>-->
+<!--            <field name="groups_id" eval="[(4,ref('uni_pharma_employee_appraisal.group_see_contracts_emps'))]"/>-->
+<!--            <field name="domain_force">[(1,'=',1)]-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="show_emps_rule" model="ir.rule">-->
+<!--            <field name="name">Show Emps</field>-->
+<!--            <field name="model_id" ref="hr.model_hr_employee"/>-->
+<!--            <field name="groups_id"  eval="[(4,ref('uni_pharma_employee_appraisal.group_see_contracts_emps'))]"/>-->
+<!--            <field name="domain_force">[(1,'=',1)]-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

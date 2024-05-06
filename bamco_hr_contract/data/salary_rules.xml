@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+         <record id="after_net" model="hr.salary.rule.category">
+            <field name="name">After Net</field>
+            <field name="code">ANET</field>
+        </record>
+
+
+        <record id="company_insurance_salary_rule" model="hr.salary.rule">
+            <field name="name">Company Insurance</field>
+            <field name="code">CISR</field>
+            <field name="category_id" ref="bamco_hr_contract.after_net"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.company_insurance_salary(categories)
+            </field>
+        </record>
+
+        <record id="employee_insurance_salary_rule" model="hr.salary.rule">
+            <field name="name">Employee Insurance</field>
+            <field name="code">EISR</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.employee_insurance_salary(categories)
+            </field>
+        </record>
+
+
+        <record id="house_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">House Allowance</field>
+            <field name="code">HASR</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.house_allowance
+            </field>
+        </record>
+
+        <record id="transportation_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Transportation Allowance</field>
+            <field name="code">TASR</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.transportation_allowance
+            </field>
+        </record>
+
+
+        <record id="other_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Other Allowance</field>
+            <field name="code">OTHASR</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.other_allowance
+            </field>
+        </record>
+
+        <record id="other_deduction_salary_rule" model="hr.salary.rule">
+            <field name="name">Other Deduction</field>
+            <field name="code">OTHDASR</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="struct_id" ref="bamco_hr_payroll_base.custom_default_payroll_structure"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*contract.other_deduction
+            </field>
+        </record>
+    </data>
+</odoo>

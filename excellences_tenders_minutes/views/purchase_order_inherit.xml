@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tender_excellence_purchase_purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">excellence_tender_purchase_purchase_order_form_inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_rfq_send'][2]" position="after">
+                    <button name="action_new_tender_minute" type="object" states="draft,sent" string="إنشاء محضر العروض"
+                            class="oe_highlight" id="tender_new" data-hotkey="v"/>
+                </xpath>
+                <xpath expr="//sheet/div[1]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="get_tenders_minutes" icon="fa-credit-card">
+                            <field string="محضر العروض" name="x_tenders_minutes_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='task_id']" position="after">
+                    <label for="x_project_duration" string="مدة المشروع"/>
+                    <div>
+                        <field name="x_project_duration" class="oe_inline"/>
+                        <field name="x_project_duration_uom" nolabel="1"
+                               widget="selection" class="oe_inline"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="xlsx_bank_form_inherit" model="ir.ui.view">
+            <field name="name">xlsx.bank.form.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="generate_bank_xlsx_report" string="Bank Report" type="object"
+                            class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

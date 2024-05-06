@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="job_offer_customer_sub_menu"
+            name="Job Offers"
+            parent="hr_recruitment.menu_crm_case_categ0_act_job"
+            action="job_offer_applicant_employee.action_custom_job_offer_customer"
+        />
+    </data>
+</odoo>

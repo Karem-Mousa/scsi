@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_job_offer_create_wizard_form" model="ir.ui.view">
+            <field name="name">job.offer.create.wizard.form</field>
+            <field name="model">job.offer.create.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Cloth Request">
+                    <group>
+                        <group>
+<!--                            <field name="employee_id"/>-->
+                            <field name="emp_name"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="salary" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="create_job_offer_request" class="oe_highlight" string="Create Request" type="object"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_job_offer_request_wizard" model="ir.actions.act_window">
+            <field name="name">Create Job Offer request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.offer.create.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="hr_recruitment.model_hr_applicant" />
+            <field name="binding_view_types">list</field>
+        </record>
+
+</odoo>

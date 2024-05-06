@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="mail_template_applicant_custom" model="mail.template">
+            <field name="name">Applicant: Custom Mail Template</field>
+            <field name="subject">Subject of the Email</field>
+            <field name="partner_to">{{ object.partner_id.id or '' }}</field>
+            <field name="subject">Job Offer for the Position: {{ object.job_id.name }}</field>
+            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="report_template" ref="hr_job_offer_letter.hr_applicant_job_offer_report"/>
+            <field name="report_name">Offer_{{ object.name }}_name</field>
+            <field name="body_html" type="html">
+                <p>
+                    <img t-attf-src="/logo.png?company={{ object.company_id.id }}"
+                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                         t-att-alt="object.company_id.name"/>
+                </p>
+                <p>
+                    Dear - عزيزي<t t-out="object.partner_name"/>,
+                </p>
+                <p>
+                    يسر شركة التميز أن تقدم لكم عرض وظيفي لوظيفة:
+                </p>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: bold; width: 25%">
+                                المسمى الوظيفي – Job Position:
+                            </td>
+                            <td>
+                                <t t-out="object.job_id.name"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <p>
+                        <br/>
+                        مرفق لكم عرض العمل موضحاً الشروط والأحكام.
+                    </p>
+                    <p>
+                        يرجى التوقيع وإعادة الإرسال والتأكد من إرساله إلى الإيميل:
+                    </p>
+                    <p>
+                        HR@excellences.sa
+                    </p>
+                    <p>
+                        شكراً مع أطيب التحيات.
+                    </p>
+                </table>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<odoo>-->
+        <!--    <data noupdate="0">-->
+        <!--        <record id="mail_template_applicant_custom" model="mail.template">-->
+        <!--            <field name="name">Applicant: Custom Mail Template</field>-->
+        <!--            <field name="subject">Subject of the Email</field>-->
+        <!--            <field name="partner_to">{{ object.partner_id.id or '' }}</field>-->
+        <!--            <field name="subject">Job Offer for the Position: {{ object.job_id.name }}</field>-->
+        <!--            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>-->
+        <!--            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>-->
+        <!--            <field name="body_html" type="html">-->
+        <!--                <p>-->
+        <!--                    <img t-attf-src="/logo.png?company={{ object.company_id.id }}"-->
+        <!--                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"-->
+        <!--                         t-att-alt="object.company_id.name"/>-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    Dear - عزيزي<t t-out="object.partner_name"/>,-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    يسر شركة التميز لحلول الاعمال أن تقدم لكم العرض الوظيفي وفقاً للبنود والشروط التالية-->
+        <!--                    <br/>-->
+        <!--                    Excellences Business Solutions Company is pleased to offer you the job offer in accordance with the-->
+        <!--                    following terms and conditions:-->
+        <!--                </p>-->
+
+        <!--                <table>-->
+        <!--                    <tbody>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold; width: 25%">-->
+        <!--                                المسمى الوظيفي – Job Position:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.job_id.name"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                اسم المشروع – Project Name:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.project_name"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                اسم العقد – Contract Name:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.task_name"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                مكان العمل- Work place:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.work_place"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                    </tbody>-->
+        <!--                </table>-->
+
+        <!--                <h4 style="color: darkblue; text-decoration: underline">-->
+        <!--                    المزايا المالية – Financial advantage:-->
+        <!--                </h4>-->
+
+        <!--                <table>-->
+        <!--                    <tbody>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold; width: 40%">-->
+        <!--                                الراتب الأساسي– Basic Salary:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.basic_salary"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                بدل السكن– Housing allowance:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.h_a"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                بدل النقل- Transportation allowance:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.t_a"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                صافي الراتب – Net Salary:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.net_salary"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                        <tr>-->
+        <!--                            <td style="font-weight: bold">-->
+        <!--                                إجمالي الراتب– Total Salary:-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <t t-out="object.total_salary"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                    </tbody>-->
+        <!--                </table>-->
+
+
+        <!--                <h4 style="color: darkblue; text-decoration: underline">-->
+        <!--                    المزايا الإضافية - Additional advantage:-->
+        <!--                </h4>-->
+
+        <!--                <p style="color: blue">-->
+        <!--                    الرعاية الصحية - Health insurance:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    حسب سياسة الشركة - According to company policy-->
+        <!--                </p>-->
+        <!--                <p style="color: blue">-->
+        <!--                    مدة العقد - Duration of the contract:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    سنة ميلادية - One year-->
+        <!--                </p>-->
+        <!--                <p style="color: blue">-->
+        <!--                    الإجازة السنوية - Annual leave:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    يوم في السنة21 - 21 days a year-->
+        <!--                </p>-->
+        <!--                <p style="color: blue">-->
+        <!--                    ساعات العمل - Work hours:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    8 ساعات يومياً / 5 أيام اسبوعياً - 8 hours a day / 5 days a week-->
+        <!--                </p>-->
+        <!--                <p style="color: blue">-->
+        <!--                    التأمينات الاجتماعية – GOSI:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    طبقاً لنظام المؤسسة العامة للتأمينات الاجتماعية - According to the system of GOSI-->
+        <!--                </p>-->
+        <!--                <p style="color: blue">-->
+        <!--                    فترة التجربة – Trial period:-->
+        <!--                </p>-->
+        <!--                <p style="margin-left: 20px">-->
+        <!--                    90 يوماً من تاريخ المباشرة - 90 days from joining date-->
+        <!--                </p>-->
+
+        <!--                <h4 style="color: darkblue; text-decoration: underline">-->
+        <!--                    بيانات العرض – Offer details:-->
+        <!--                </h4>-->
+        <!--                <ul>-->
+        <!--                    <li>-->
+        <!--                        5 أيام من تاريخ العرض-->
+        <!--                        <br/>-->
+        <!--                        5 days from the date of the offer-->
+        <!--                    </li>-->
+        <!--                    <li>-->
+        <!--                        هذا العرض لا يشكل أي التزام على الشركة الى ان يتم توقيع العقد واستكمال الإجراءات - This offer-->
+        <!--                        does not constitute any obligation on the company until the contract is signed and the-->
+        <!--                        procedures are completed-->
+        <!--                    </li>-->
+        <!--                </ul>-->
+
+        <!--                <hr/>-->
+        <!--                <p>-->
+        <!--                    We are all looking forward to having you on our team.-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    نتطلع لقبولكم العرض الانضمام الى فريقنا.-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    يمكنك الرد بالقبول عبر الايميل – مع التأكد من وجود HR@excellences.sa في الايميل – او بطباعة العرض و-->
+        <!--                    التوقيع عليه و إرساله الى HR@excellences.sa .-->
+
+        <!--                </p>-->
+
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--    </data>-->
+        <!--</odoo>-->

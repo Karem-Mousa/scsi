@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <record id="kpi_appraisal_form_view" model="ir.ui.view">
+            <field name="name">kpi.appraisal.form.view</field>
+            <field name="model">hr.appraisal</field>
+            <field name="inherit_id" ref="hr_appraisal.view_hr_appraisal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_close']" position="after">
+                    <field name="kpi_id"/>
+                    <field name="is_hr" invisible="1"/>
+                    <field name="is_manager" invisible="1"/>
+                    <field name="is_manager_button" invisible="1"/>
+                    <field name="is_hr_button" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="attend_id"/>
+                </xpath>
+                <xpath expr="//field[@name='date_close']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|',('is_manager','=',True),('is_hr','=',True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|',('is_manager','=',True),('is_hr','=',True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='kpi_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|',('is_manager','=',True),('is_hr','=',True)]}</attribute>
+                </xpath>
+                <xpath expr="//page[2]" position="after">
+                    <page name="emp_evaluate" string="Employee Evaluation">
+                        <group>
+                            <field name="manager_appraisal_line" attrs="{'readonly': [('is_hr','=',True)]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="question" force_save="1" />
+                                    <field name="full_mark" force_save="1" />
+                                    <field name="mark_added"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="hr_appraisal_line" attrs="{'invisible': [('is_manager','=',True)]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="question" force_save="1" />
+                                    <field name="full_mark" force_save="1" />
+                                    <field name="mark_added"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <label for="total_manager_appraisal"/>
+                            <div class="o_row">
+                                <field name="total_manager_appraisal"/>
+                                <span>%%</span>
+                            </div>
+                            <label for="total_hr_appraisal" attrs="{'invisible': [('is_manager','=',True)]}"/>
+                            <div class="o_row" attrs="{'invisible': [('is_manager','=',True)]}">
+                                <field name="total_hr_appraisal"/>
+                                <span>%%</span>
+                            </div>
+                            <label for="total_manager_hr_appraisal"/>
+                            <div class="o_row">
+                                <field name="total_manager_hr_appraisal"/>
+                                <span>%%</span>
+                            </div>
+                        </group>
+                        <field name="recomndetions"/>
+                    </page>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="manager_notify" string="Send Manager Notification" type="object"
+                            attrs="{'invisible':['|',('is_manager','=',True),('is_manager_button','=',True)]}"
+                            class="oe_highlight"/>
+                    <button name="hr_notify" string="Send Hr Notification" type="object"
+                            attrs="{'invisible':['|',('is_hr','=',True),('is_hr_button','=',True)]}"
+                            class="oe_highlight"/>
+                    <button name="print_evaluation" string="Print Employee Evaluation" type="object"
+                            attrs="{'invisible':[('state','!=','done')]}"
+                            class="oe_highlight"/>
+<!--                    <button name="create_emp_appraisal_data" string="Save Appraisal Data" type="object"-->
+<!--                            attrs="{'invisible':[('state','!=','done')]}"-->
+<!--                            class="oe_highlight"/>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="second_menu_action_appraisal" model="ir.actions.act_window">
+            <field name="name">Appraisal</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.appraisal</field>
+            <field name="domain">[('employee_id.coach_id.user_id', '=', uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

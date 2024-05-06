@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+
+    <record id="stem_employee_request_form" model="ir.ui.view">
+        <field name="name">Stem Employee request</field>
+        <field name="model">employee.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="employee_id" />
+                        <field name="department"/>
+                        <field name="req_type"/>
+                        <field name="directed_to_id"/>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                   </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stem_employee_request_tree" model="ir.ui.view">
+          <field name="name">Stem Employee Request</field>
+          <field name="model">employee.request</field>
+          <field name="arch" type="xml">
+                <tree string="Employee Request">
+                  <field name="employee_id" />
+                  <field name="department"/>
+                  <field name="req_type"/>
+                  <field name="directed_to_id"/>
+                  <field name="state"  />
+                </tree>
+          </field>
+    </record>
+
+    <record id="stem_employee_request_action" model="ir.actions.act_window">
+        <field name="name">Employee Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="stem_employee_request_search" model="ir.ui.view">
+        <field name="name">stem.employee.request.search</field>
+        <field name="model">employee.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="department"/>
+                <field name="state"/>
+<!--                <filter string="Rating Type" name="Rating Type" context="{'group_by':'rating_type'}"/>-->
+            </search>
+        </field>
+    </record>
+
+
+  </data>
+</odoo>

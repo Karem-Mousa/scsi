@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="ex_tender_report_wiz_view_form" model="ir.ui.view">
+            <field name="name">ex.tender.report.wiz_view_form</field>
+            <field name="model">ex.tender.report.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="no_facility" required="1"/>
+                                <label for="period_no"/>
+                                <div class="o_row">
+                                    <field name="period_no" class="oe_inline" required="1"/>
+                                    <field name="period_type" class="oe_inline" required="1"/>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button class="btn-primary" name="print_report" type="object" string="طباعة"/>
+                        <button special="cancel" string="الغاء"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

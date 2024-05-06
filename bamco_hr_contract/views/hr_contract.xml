@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_centione_hr_contract_form" model="ir.ui.view">
+            <field name="name">Centione Hr Contract Form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='resource_calendar_id']" position="after">
+                    <field name="num_working_days_month"/>
+                    <field name="num_working_hours_day"/>
+                </xpath>
+                <xpath expr="//field[@name='contract_type_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='structure_type_id']" position="attributes">
+                    <attribute name="required">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                    <field name="contract_select_rel"/>
+                    <field name="emp_statues_rel"/>
+                    <field name="contract_statue"/>
+                    <field name="contract_status"/>
+                    <!--                    <field name="gross"/>-->
+                    <!--                    <field name="basic_housing"/>-->
+                    <!--                    <field name="basic_transport"/>-->
+                </xpath>
+                <xpath expr="//field[@name='hr_responsible_id']" position="attributes">
+                    <attribute name="required">False</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_end']" position="attributes">
+                    <attribute name="attrs">{'required': [('contract_statue', '=', 'specified')]}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='wage']" position="attributes">
+                    <attribute name="string">Basic</attribute>
+                </xpath>
+                <xpath expr="//page[@name='other']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//div[@name='wage']" position="after">
+                    <field name="house_allowance"/>
+                    <field name="transportation_allowance"/>
+                    <field name="other_allowance"/>
+                    <field name="employee_gosi" string="Gosi"/>
+                    <field name="social_deductions" string="Gosi deductions" attrs="{'invisible':[('employee_gosi','!=',True)]}"/>
+                    <field name="social_after_deductions" attrs="{'invisible':[('employee_gosi','!=',True)]}"/>
+                    <!--                     <field name="over_fifty"/>-->
+                    <!--                     <field name="over_fifty_amount" attrs="{'invisible':[('over_fifty','!=',True)]}"/>-->
+                    <!--                     <field name="other_deduction"/>-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

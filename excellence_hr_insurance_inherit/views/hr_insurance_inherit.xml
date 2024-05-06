@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="excel_employee_insurance__details_form_form_inherit" model="ir.ui.view">
+            <field name="name">excel_employee_insurance_details_form_inherit</field>
+            <field name="model">hr.insurance</field>
+            <field name="inherit_id" ref="ent_hr_insurance.employee_insurance__details_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='policy_id']" position="before">
+                    <field name="x_insurance_company" string="Insurance Company"/>
+                </xpath>
+                <xpath expr="//field[@name='policy_id']" position="after">
+                    <field name="x_class" string="Class"/>
+                    <field name="x_payment_code" string="Payment Code"/>
+                </xpath>
+                <field name="sum_insured" position="after">
+                    <field name="x_paid_amount" string="Paid Insured"/>
+                    <field name="x_ref_order" string="Ref Order"/>
+                </field>
+                <field name="date_from" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="date_to" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name="policy_coverage" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="amount" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

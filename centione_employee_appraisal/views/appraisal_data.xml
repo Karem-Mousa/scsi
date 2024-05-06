@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record id="appraisal_data_form_view" model="ir.ui.view">
+            <field name="name">appraisal.data.form.view</field>
+            <field name="model">appraisal.data</field>
+            <field name="arch" type="xml">
+                <form string="Appraisal Data">
+                    <sheet>
+                        <group string="Data">
+                            <field name="employee_id"/>
+                            <field name="attendance_id"/>
+                            <field name="date_close"/>
+                            <field name="department_id"/>
+                            <field name="kpi_id"/>
+                        </group>
+                        <group string="Manager">
+                            <field name="manager_question"/>
+                            <field name="manager_evaluation"/>
+                        </group>
+                        <group string="Hr">
+                            <field name="hr_question"/>
+                            <field name="hr_evaluation"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="appraisal_data_tree_view" model="ir.ui.view">
+            <field name="name">appraisal.data.tree.view</field>
+            <field name="model">appraisal.data</field>
+            <field name="arch" type="xml">
+                <tree string="Appraisal Data">
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="kpi_id"/>
+                    <field name="attendance_id"/>
+                    <field name="date_close"/>
+                    <field name="manager_question"/>
+                    <field name="manager_evaluation"/>
+                    <field name="hr_question"/>
+                    <field name="hr_evaluation"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="appraisal_data_search_view" model="ir.ui.view">
+            <field name="name">appraisal.data.search.view</field>
+            <field name="model">appraisal.data</field>
+            <field name="arch" type="xml">
+                <search string="Appraisal Data">
+                    <field name="employee_id" string="Employee"/>
+                    <field name="attendance_id" string="Attendance"/>
+                    <field name="date_close" string="Appraisal Deadline"/>
+                    <field name="manager_question" string="Manager Question"/>
+                    <field name="manager_evaluation" string="Manager Evaluation"/>
+                    <field name="hr_question" string="Hr Question"/>
+                    <field name="hr_evaluation" string="Hr Evaluation"/>
+                    <field name="department_id" string="Department"/>
+                    <field name="kpi_id" string="KPI"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="appraisal_data_action_view" model="ir.actions.act_window">
+            <field name="name">Appraisal Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">appraisal.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="appraisal_data_menu_item" name="Apparisal Data"
+                  parent="hr_appraisal.menu_hr_appraisal_configuration" action="appraisal_data_action_view"
+                  sequence="101"/>
+    </data>
+</odoo>

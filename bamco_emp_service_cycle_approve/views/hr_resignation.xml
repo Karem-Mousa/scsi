@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="hr_resignation_req_form_cycle_approve" model="ir.ui.view">
+            <field name="name">hr.resignation.req.form.cycle.approve</field>
+            <field name="model">hr.resignation.req</field>
+            <field name="inherit_id"
+                   ref="bamco_resignation.employee_resignation_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='reason']" position="after">
+                    <field name="notes" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="hr_comment" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="process" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="company_id" invisible="1"/>
+
+
+                </xpath>
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <field name="dep_manager" invisible="1"/>
+                        <field name="is_validation_user" invisible="1"/>
+                        <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'draft'),('dep_manager', '!=', uid)]&quot;}"/>
+
+                        <button name="action_validate" type="object" string="Validate" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+
+                        <button name="action_refuse" type="object" string="Refuse" class="oe_highlight"
+                                attrs="{'invisible': &quot;['|',('state', '!=', 'approved'),('is_validation_user', '!=', True)]&quot;}"/>
+                        <button name="print_report" type="object" string="نموذج طلب إداري" states="validated"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,validated"/>
+                    </header>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="bamco_resignation.bamco_resignation_report"
+                model="ir.actions.report">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

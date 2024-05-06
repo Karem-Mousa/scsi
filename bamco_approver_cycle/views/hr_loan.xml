@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_loan_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.loan.employee.form.inherit</field>
+            <field name="model">hr.loan</field>
+            <field name="inherit_id" ref="bamco_hr_loan_correct.loan_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='installment_amount']" position="after">
+                    <field name="comment"/>
+                    <field name="is_approve"/>
+                </xpath>
+                <xpath expr="//button[@name='action_approved']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_approve', '!=', True)]}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='total_unpaid']" position="after">
+                    <field name="done_payment_date"/>
+                    <field name="user_done"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

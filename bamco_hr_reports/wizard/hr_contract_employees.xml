@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="contract_employee_xlsx_form" model="ir.ui.view">
+            <field name="name">contract.employee.xlsx.form</field>
+            <field name="model">hr.contract.employees</field>
+            <field name="arch" type="xml">
+                <form string="Contract Report">
+                    <sheet>
+                        <group>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="generate_contract_xlsx" string="Generate Contract Report" type="object"
+                                class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="contract_employee_xlsx_action" model="ir.actions.act_window">
+            <field name="name">Contract Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.contract.employees</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="contract_employee_xlsx_menu" name="Contract Report" parent="hr.menu_hr_employee_payroll"
+                  action="contract_employee_xlsx_action" sequence="7"/>
+    </data>
+</odoo>

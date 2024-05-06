@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="new_hr_expense_action" model="ir.actions.act_window">
+            <field name="name">New Expense</field>
+            <field name="res_model">hr.expense</field>
+            <field name="view_mode">form,tree,graph</field>
+<!--            <field name="domain">[('opportunity_id', '=', active_id)]</field>-->
+<!--            <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>-->
+        </record>
+
+        <record id="excel_crm_lead_view_form_inherit" model="ir.ui.view">
+            <field name="name">excel_crm_lead_view_form_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <!--add expenses button-->
+                  <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
+                    <button string="شراء الكراسة" name="action_new_expense" type="object" class="oe_highlight" data-hotkey="q"
+                        title="شراء الكراسة"
+                        attrs="{'invisible':  [('stage_id', '!=', 2)]}"/>
+                </xpath>
+
+                <!--add expenses count smart button-->
+                  <xpath expr="//button[@name='action_schedule_meeting']" position="after">
+                    <button class="oe_stat_button" type="object" name="get_expense" icon="fa-credit-card">
+                        <field string="Expenses" name="x_expenses_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+
+                <!--fields at 2nd state-->
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                      <page name="sheet_info" string="Sheet Info" attrs="{'invisible': [('stage_id', '!=', 2)]}">
+                          <group>
+                              <field name="x_sheet_name"  attrs="{'required':[('stage_id', '=', 2)]}"/>
+                              <field name="x_sheet_price" attrs="{'required':[('stage_id', '=', 2)]}"/>
+                              <field name="x_ads_date" attrs="{'required':[('stage_id', '=', 2)]}"/>
+                              <field name="x_delivery_date" attrs="{'required':[('stage_id', '=', 2)]}"/>
+                              <field name="x_final_offer_preparation_date" attrs="{'required':[('stage_id', '=', 2)]}"/>
+                          </group>
+                      </page>
+                </xpath>
+
+               <!--fields at 3rd state-->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="x_technical_offer_uploaded"  attrs="{'invisible': [('stage_id', '!=', 3)], 'required':[('stage_id', '=', 3)]}"/>
+                    <field name="x_financial_offer_uploaded" attrs="{'invisible': [('stage_id', '!=', 3)], 'required':[('stage_id', '=', 3)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">
+                        {'required':[('stage_id', '=', 3)]}
+                    </attribute>
+                </xpath>
+
+                <!--fields at 5th state-->
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                      <page name="offer_info" string="Offer Info" attrs="{'invisible': [('stage_id', '!=', 5)]}">
+                        <group>
+                          <group>
+                              <field name="x_offer_delivered"  attrs="{'required':[('stage_id', '=', 5)]}"/>
+                              <field name="x_copy_offer_uploaded" attrs="{'required':[('stage_id', '=', 5)]}"/>
+                          </group>
+                          <group>
+                              <field name="x_offer_delivered_date"  attrs="{'required':[('stage_id', '=', 5)]}"/>
+                              <field name="x_offer_document" attrs="{'required':[('stage_id', '=', 5)]}"/>
+                          </group>
+                        </group>
+                      </page>
+                </xpath>
+
+                <!--fields at 5th state-->
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="awarding_info" string="Awarding Info" attrs="{'invisible': [('stage_id', '!=', 6)]}">
+                          <group>
+                              <field name="x_awarding_document_uploaded"  attrs="{'required':[('stage_id', '=', 6)]}"/>
+                              <field name="x_awarding_document" attrs="{'required':[('stage_id', '=', 6)]}"/>
+                          </group>
+                    </page>
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <record id="excel_sale_crm_crm_case_form_view_oppor_inherit" model="ir.ui.view">
+            <field name="name">excel_sale_crm_crm_case_form_view_oppor_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+              <xpath expr="//button[@name='action_sale_quotations_new']" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': ['|', ('type', '=', 'lead'),'|',('stage_id', '=', 2), '&amp;', ('probability', '=', 0), ('active', '=', False)]}
+                    </attribute>
+              </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

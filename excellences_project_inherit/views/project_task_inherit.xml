@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <record id="exc_view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">excel.project.view_task_form2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field name="management_approve" string="Management ِAِِِpprove"/>
+                </xpath>
+                <xpath expr="//button[@name='action_assign_to_me']" position="after">
+                    <button string="Hiring Request" name="open_applicant"
+                            type="object" class="oe_highlight" data-hotkey="q" title="Hiring Request"
+                            attrs="{'invisible': [('stage_id', 'in', [95,96])]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hr_applicant_inherit" model="ir.ui.view">
+            <field name="name">hr.applicant.inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//div[@class='o_row'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='salary_expected']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//div[@class='o_row'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='salary_proposed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="project_name"/>
+                    <field name="task_name"/>
+                    <field name="work_place"/>
+                </xpath>
+                <notebook position="inside">
+                    <page string="المزايا المالية">
+                        <group>
+                            <group>
+                                <field name="basic_salary"/>
+                                <field name="h_a"/>
+                                <field name="t_a"/>
+                            </group>
+                            <group>
+                                <field name="net_salary"/>
+                                <field name="total_salary"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+                <notebook position="inside">
+                    <page string="المزايا الإضافية">
+                        <group>
+                            <group>
+                                <field name="h_e"/>
+                                <field name="d_c"/>
+                                <field name="a_l"/>
+                            </group>
+                            <group>
+                                <field name="w_h"/>
+                                <field name="gossi"/>
+                                <field name="probation"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+                <notebook position="inside">
+                    <page string="بيانات العرض">
+                        <group>
+                            <field name="offer_details"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

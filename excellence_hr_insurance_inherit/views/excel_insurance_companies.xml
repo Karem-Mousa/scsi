@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_hr_insurance_companies_form" model="ir.ui.view">
+            <field name="name">Excel Insurance Companies Form</field>
+            <field name="model">excel.insurance.companies</field>
+            <field name="arch" type="xml">
+                <form string="Insurance Companies">
+                    <sheet>
+                        <group>
+                            <field name="company_id" string="Company Name"/>
+                            <field name="policy_id" string="Policy"/>
+                            <field name="insurance_class" string="Class"/>
+                            <field name="payment_code" string="Payment Code"/>
+
+                            <label for="date_from" string="Policy Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/>
+                                -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="excel_hr_insurance_companies_tree" model="ir.ui.view">
+            <field name="name">Employee Insurance Companies</field>
+            <field name="model">excel.insurance.companies</field>
+            <field name="arch" type="xml">
+                <tree string="Insurance Companies">
+                    <field name="company_id" string="Company Name"/>
+                    <field name="policy_id" string="Policy"/>
+                    <field name="insurance_class" string="Class"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_insurance_companies" model="ir.actions.act_window">
+            <field name="name">Insurance Companies</field>
+            <field name="res_model">excel.insurance.companies</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You have'nt created any policy company yet.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="excel_hr_insurance_menu"
+                name="Insurance"
+                parent="hr.menu_hr_root"
+                groups="excellence_hr_insurance_inherit.excel_group_hr_insurance"
+        />
+        <menuitem
+                id="hr_insurance_companies_menu"
+                name="Insurance Companies"
+                parent="excellence_hr_insurance_inherit.excel_hr_insurance_menu"
+                action="action_insurance_companies"/>
+    </data>
+</odoo>

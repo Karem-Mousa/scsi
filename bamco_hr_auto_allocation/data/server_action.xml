@@ -1,0 +1,91 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="allocation_leaves" model="ir.cron">
+            <field name="name">Allocation leaves</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="nextcall"
+                   eval="DateTime(2021,1,1).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="code">model.create_allocations()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="transfer_allocations" model="ir.cron">
+            <field name="name">Transfer Allocations</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="nextcall"
+                   eval="DateTime(2021,1,1).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="code">model.transfer_allocations()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="check_allocations" model="ir.cron">
+            <field name="name">Check Allocations</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="nextcall"
+                   eval="DateTime(2021,1,1).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="code">model.check_allocations()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="confirm_all_allocation_action" model="ir.actions.server">
+            <field name="name">Confirm All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_confirm()
+            </field>
+        </record>
+
+        <record id="refuse_all_allocation_action" model="ir.actions.server">
+            <field name="name">Refuse All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_refuse()
+            </field>
+        </record>
+
+        <record id="draft_all_allocation_action" model="ir.actions.server">
+            <field name="name">Draft All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_draft()
+            </field>
+        </record>
+
+        <record id="validate_all_allocation_action" model="ir.actions.server">
+            <field name="name">Validate All</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="binding_model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.action_validate()
+            </field>
+        </record>
+    </data>
+</odoo>

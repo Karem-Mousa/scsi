@@ -1,0 +1,150 @@
+<odoo>
+    <data>
+        <record id="purchase_action_tender_minute_new" model="ir.actions.act_window">
+            <field name="name">tender_minute</field>
+            <field name="res_model">excellence.tenders.minutes</field>
+            <field name="view_mode">form,tree,graph</field>
+        </record>
+        <record id="action_tender_minute_add_signature" model="ir.actions.act_window">
+            <field name="name">tender_minute_signature</field>
+            <field name="res_model">excellence.tenders.minutes.signature</field>
+            <field name="view_mode">form,tree</field>
+        </record>
+        <record id="excellence_tenders_minutes_signature_form" model="ir.ui.view">
+            <field name="name">excellence_tenders_minutes_signature_form</field>
+            <field name="model">excellence.tenders.minutes.signature</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div>
+                            <label for="user_id" string="الاسم"/>
+                            <field name="user_id"/>
+                        </div>
+                        <div>
+                            <label for="user_job_position" string="الوظيفة"/>
+                            <field name="user_job_position"/>
+                        </div>
+                        <div>
+                            <label for="signature_date" string="تاريخ التوقيع"/>
+                            <field name="signature_date"/>
+                        </div>
+                        <label for="signature" string="التوقيع"/>
+                        <field name="signature" widget="signature" string="التوقيع"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="seq_tender_name" model="ir.sequence">
+            <field name="name">tender Sequence</field>
+            <field name="code">excellence.tenders.minutes</field>
+            <field name="prefix">445000</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="excellence_tenders_minutes_form" model="ir.ui.view">
+            <field name="name">excellence_tenders_minutes_form</field>
+            <field name="model">excellence.tenders.minutes</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project_name" string="اسم المشروع"/>
+                                <field name="tender_created_date" string="تاريخ إنشاء المحضر"/>
+                                <field name="responsible_employee" widget="many2many_tags" string="الموظف المسئول"/>
+                            </group>
+                        </group>
+
+
+                        <field name="tender_minute_lines_ids">
+                            <tree editable="bottom">
+                                <field name="vendor_id" string="اسم الشركة"/>
+                                <field name="tender_amount" string="قيمة العرض"/>
+                                <field name="paper_completed" string="مكتمل الأوراق"/>
+                                <field name="technical_evaluation" widget="percentage" string="التقييم الفنى"/>
+                                <field name="technical_attachment" filename="technical_attachment_store_fname" widget="binary"
+                                       string=" ملف التقييم الفنى"/>
+                                <field name="technical_attachment_store_fname" invisible="1"/>
+                                <field name="financial_evaluation" widget="percentage" string="التقييم المالى"/>
+                                <field name="financial_attachment" filename="financial_attachmen_store_fname" widget="binary"
+                                       string=" ملف التقييم المالى"/>
+                                <field name="financial_attachmen_store_fname" invisible="1"/>
+                                <field name="company_strength" widget="percentage" string="قوة الشركة "/>
+                                <field name="awarded" string="الترسية"/>
+                            </tree>
+                        </field>
+
+                        <div style="text-align: right;">
+                            <h3>
+                                بناءا على ما ورد بأعلاه والمرفقات فقد تبين أن العرض المطابق فنيا و ماليا هو عرض شركة
+                            </h3>
+                            <div>
+                                <field name="selected_company" nolabel="1"/>
+                            </div>
+                            <h3>
+                                بمبلغ
+                            </h3>
+                            <div>
+                                <field name="selected_company_tender_amount" nolabel="1"/>
+                            </div>
+                            <h3>
+                                وعليه فإن اللجنة الفنية توصي بالترسية عليها
+                            </h3>
+                        </div>
+
+
+                        <notebook>
+                            <page string="Add Signature" name="add_signature">
+                                <button name="action_add_signature" type="object" string="إضافة توقيع"
+                                        class="oe_highlight" id="add_signature" data-hotkey="v"/>
+                                <field name="tender_users_signature_ids">
+                                    <tree editable="bottom" create="false">
+                                        <field name="user_id" string="الاسم"/>
+                                        <field name="user_job_position" string="الوظيفة"/>
+                                        <field name="signature_date" string="تاريخ التوقيع"/>
+                                        <field name="signature" widget="signature" string="التوقيع"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="excellence_tenders_minutes_tree_view" model="ir.ui.view">
+            <field name="name">excellence_tenders_minutes_tree_view</field>
+            <field name="model">excellence.tenders.minutes</field>
+            <field name="arch" type="xml">
+                <tree string="Bid Evaluation">
+                    <field name="name" string="رقم المحضر"/>
+                    <field name="project_name" string="اسم المحضر"/>
+                    <field name="tender_created_date"/>
+                    <field name="responsible_employee"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="excellence_tenders_minutes_action" model="ir.actions.act_window">
+            <field name="name">Bid Evaluation</field>
+            <field name="res_model">excellence.tenders.minutes</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="excellence_tenders_minutes" name="محاضر العروض"
+                  action="excellence_tenders_minutes_action"
+                  web_icon="excellences_tenders_minutes,static/description/tender.jpeg"
+        />
+
+    </data>
+</odoo>

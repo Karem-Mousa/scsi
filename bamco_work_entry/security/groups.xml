@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="make_work_entry_invisible" model="res.groups">
+            <field name="name">Show Work Entry</field>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_work_entry_contract_enterprise.menu_hr_payroll_work_entries_root">
+    <field name="groups_id" eval="[(5,ref('make_work_entry_invisible'))]"/>
+</record>
+    </data>
+</odoo>

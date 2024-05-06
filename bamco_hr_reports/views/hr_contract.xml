@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="before_contract_data_form_inherit" model="ir.ui.view">
+            <field name="name">before.contract.data.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='wage']" position="after">
+                    <field name="basic_before" invisible="1"/>
+                    <field name="house_allowance_before" invisible="1"/>
+                    <field name="transportation_allowance_before" invisible="1"/>
+                    <field name="other_allowance_before" invisible="1"/>
+                    <field name="date_raise" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+<!--          <record id="set_old_wage_action" model="ir.actions.server">-->
+<!--            <field name="name">Set Old Wage</field>-->
+<!--            <field name="type">ir.actions.server</field>-->
+<!--            <field name="model_id" ref="hr_contract.model_hr_contract"/>-->
+<!--            <field name="buinding_model_id" ref="hr_contract.model_hr_contract"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--                if records:-->
+<!--                    records.add_old_wage()-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

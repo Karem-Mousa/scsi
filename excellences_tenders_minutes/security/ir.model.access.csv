@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_excellence_tenders_minutes,access.excellence_tenders_minutes,model_excellence_tenders_minutes,,1,1,1,1
+access_excellence_tenders_minutes_line,access.excellence_tenders_minutes_line,model_excellence_tenders_minutes_line,,1,1,1,1
+access_excellence_tenders_minutes_signature,access.excellence_tenders_minutes_signature,model_excellence_tenders_minutes_signature,,1,1,1,1

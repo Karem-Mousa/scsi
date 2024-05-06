@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="admin_req_temp">
+            <div class="header">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="/bamco_admin_req_report/static/img/Logo.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <img src="/bamco_admin_req_report/static/img/footer2.png" style="width: 100%"/>
+            </div>
+            <t t-call="web.internal_layout">
+                <style>
+                    .bold-cell{
+                    font-weight: bold;
+                    }
+                    .gray-bg{
+                    background-color: #bfbfbf;
+                    }
+                    .black-border, tbody > tr,tr > td {
+                    border: 2px solid black;
+                    }
+                    hr {
+                    border: 1px dotted black;
+                    margin-top: 2em;
+                    }
+
+                </style>
+                <div class="page text-right" dir="rtl">
+                    <h3 class="text-center gray-bg black-border">نموذج طلب إداري</h3>
+                    <div>
+                        التاريخ:
+                        <span t-esc="datetime.date.today()"/>
+                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="bold-cell">إسم الموظف</td>
+                                <td>
+                                    <span t-esc="o.employee_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">الرقم الوظيفي</td>
+                                <td>
+                                    <span t-esc="o.employ_no"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">الجنسية</td>
+                                <td>
+                                    <span t-esc="o.country_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">المسمى الوظيفي</td>
+                                <td>
+                                    <span t-esc="o.job_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">القسم التابع له</td>
+                                <td>
+                                    <span t-esc="o.department_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">رقم الجوال</td>
+                                <td>
+                                    <span t-esc="o.mobile_phone"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell">موجهة إلى</td>
+                                <td>
+                                    <span t-esc="o.direct_to"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="bold-cell gray-bg">تفاصيل الطلب:</td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                                                    <span t-esc="o.comment"/>
+
+<!--                                    <hr/>-->
+<!--                                    <hr/>-->
+<!--                                    <hr/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold-cell gray-bg">توقيع الموظف:</td>
+                                <td class="bold-cell gray-bg">توقيع المدير المباشر:</td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="bold-cell gray-bg">توصيات إدارة الموارد البشرية:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"/>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="bold-cell gray-bg">إعتماد إدارة الموارد البشرية:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        وقد قدمت هذه الشهادة بناء على طلبه دون ادنى مسئولية على الشركة
+
+                        وتفضلوا بقبول فائق الاحترام،
+                    </p>
+                    <p class="text-center">مدير الموارد البشرية</p>
+                    <p class="text-center bold-cell">محمد بن يحيى الغزواني</p>
+
+                    <div class="row">
+                        <div class="col-6"/>
+                        <div class="col-6 text-center">
+                            الخــتـــــــــــــــــــــم
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="admin_req_main_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bamco_admin_req_report.admin_req_temp"/>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="admin_req_report" model="ir.actions.report">
+            <field name="name">نموذج طلب إداري</field>
+            <field name="model">admin.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bamco_admin_req_report.admin_req_main_temp</field>
+            <field name="report_file">bamco_admin_req_report.admin_req_main_temp</field>
+            <field name="binding_model_id" ref="model_admin_request"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="excel_group_hr_insurance" model="res.groups">
+            <field name="name">Excel Hr Insurance</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Paper Format -->
+        <record id="paperformat_custom_applicant_pdf" model="report.paperformat">
+            <field name="name">Custom Applicant PDF - A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="disable_shrinking" eval="True"/>
+            <field name="dpi">96</field>
+        </record>
+
+        <template id="applicant_temp">
+            <div class="page">
+                <style>
+                    .th-cell-color {
+                    background-color: #2f5496;
+                    color: white;
+                    text-align: center;
+                    }
+                    table, tr, td, th {
+                    border-color: #2e75b5 !important;
+                    }
+                    .page {
+                    text-align: center;
+                    font-size: 10px;
+                    }
+                </style>
+                <table class="table table-bordered table-sm">
+                    <tbody>
+                        <tr style="border-top: 1px solid #2f5496">
+                            <td rowspan="2" class="th-cell-color" style="width: 100px;vertical-align: center;">
+                                Name / الاسم
+                            </td>
+                            <td rowspan="2">
+                                <span t-esc="o.partner_name"/>
+                            </td>
+                            <td class="th-cell-color" style="width: 100px">
+                                Date / التاريخ
+                            </td>
+                            <td>
+                                <span t-esc="o.create_date.date()"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                ID / رقم الهوية
+                            </td>
+                            <td/>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-center">
+                    يسر شركة التميز لحلول الاعمال أن تقدم لكم العرض الوظيفي وفقاً للبنود والشروط التالية: -
+                    <br/>
+                    Excellences Business Solutions Company is pleased to offer you the job offer in accordance with the
+                    following terms and conditions:
+                </p>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th class="th-cell-color" colspan="2">
+                                المعلومات الأساسية
+                            </th>
+                            <th class="th-cell-color" colspan="2">
+                                Basic Data
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="th-cell-color" style="width: 25%">
+                                المسمى الوظيفي
+                            </td>
+                            <td style="width: 25%">
+                                <span t-field="o.job_id"/>
+                            </td>
+                            <td style="width: 25%">
+                                <span t-field="o.job_id"/>
+                            </td>
+                            <td class="th-cell-color" style="width: 25%">
+                                Job Title
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                الدرجة
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.type_id"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Grade
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                اسم المشروع
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.project_name"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Project Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                مكان العمل
+                            </td>
+                            <td>
+                                <span t-field="o.work_place"/>
+                            </td>
+                            <td/>
+                            <td class="th-cell-color">
+                                Work Place
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th class="th-cell-color" colspan="2">
+                                المزايا المالية
+                            </th>
+                            <th class="th-cell-color" colspan="2">
+                                Financial Advantage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="th-cell-color">
+                                الراتب الأساسي
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.basic_salary"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Basic Salary
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                بدل السكن
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.h_a"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Housing Allowance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                بدل النقل
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.t_a"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Transportation Allowance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color" style="width: 25%">
+                                بدلات اخرى
+                            </td>
+                            <td style="width: 25%"/>
+                            <td style="width: 25%"/>
+                            <td class="th-cell-color" style="width: 25%">
+                                Other Allowances
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                صافي الراتب
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.net_salary"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Net Salary
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                إجمالي الراتب
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.total_salary"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Total Salary
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th class="th-cell-color" colspan="2">
+                                المزايا الاضافية
+                            </th>
+                            <th class="th-cell-color" colspan="2">
+                                Additional Advantage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="th-cell-color">
+                                الرعاية الصحية
+                            </td>
+                            <td>
+                                <span t-if="o.h_e" t-esc="o.h_e.split('-')[0]"/>
+                            </td>
+                            <td>
+                                <span t-if="o.h_e" t-esc="o.h_e.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Health Insurance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                مدة العقد
+                            </td>
+                            <td>
+                                <span t-if="o.d_c" t-esc="o.d_c.split('-')[0]"/>
+                            </td>
+                            <td>
+                                <span t-if="o.d_c" t-esc="o.d_c.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Duration of the contract
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                الاجازة السنوية
+                            </td>
+                            <td>
+                                <span t-if="o.a_l" t-esc="o.a_l.split('-')[0]"/>
+                            </td>
+                            <td>
+                                <span t-if="o.a_l" t-esc="o.a_l.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Annual Leave
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color" style="width: 25%">
+                                ساعات العمل
+                            </td>
+                            <td style="width: 25%">
+                                <span t-if="o.w_h" t-esc="o.w_h.split('-')[0]"/>
+                            </td>
+                            <td style="width: 25%">
+                                <span t-if="o.w_h" t-esc="o.w_h.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color" style="width: 25%">
+                                Work Hours
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                التأمينات الاجتماعية
+                            </td>
+                            <td>
+                                <span t-if="o.gossi" t-esc="o.gossi.split('-')[0]"/>
+                            </td>
+                            <td>
+                                <span t-if="o.gossi" t-esc="o.gossi.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color">
+                                GOSI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                فترة التجربة
+                            </td>
+                            <td>
+                                <span t-if="o.probation" t-esc="o.probation.split('-')[0]"/>
+                            </td>
+                            <td>
+                                <span t-if="o.probation" t-esc="o.probation.split('-')[1]"/>
+                            </td>
+                            <td class="th-cell-color">
+                                Probation Period
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="th-cell-color">
+                                مدة العرض
+                            </td>
+                            <td/>
+                            <td/>
+                            <td class="th-cell-color">
+                                Offer validity
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-sm">
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                الرئيس التنفيذي CEO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                Name / الاسم
+                            </td>
+                            <td style="width: 25%"/>
+                            <td class="th-cell-color">
+                                Signature / التوقيع
+                            </td>
+                            <td style="width: 25%"/>
+                            <td class="th-cell-color">
+                                Date / التاريخ
+                            </td>
+                            <td style="width: 25%"/>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-center">
+                    أوافق على جميع الشروط والمزايا الواردة أعلاه وعليه جرى التوقيع
+                    <br/>
+                    I agree to all the terms and benefits mentioned above and signed
+                </p>
+
+                <table class="table table-bordered table-sm">
+                    <tbody>
+                        <tr>
+                            <td class="th-cell-color">
+                                Name / الاسم
+                            </td>
+                            <td style="width: 30%"/>
+                            <td class="th-cell-color">
+                                Date / التاريخ
+                            </td>
+                            <td style="width: 30%"/>
+                        </tr>
+                        <tr>
+                            <td class="th-cell-color">
+                                Signature / التوقيع
+                            </td>
+                            <td/>
+                            <td class="th-cell-color">
+                                Expected Joining Date / تاريخ المباشرة المتوقع
+                            </td>
+                            <td/>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-right">
+                    ملاحظة: في حال موافقتكم على ما ورد أعلاه يرجى التوقيع على هذا العرض واعادته لنا
+                </p>
+            </div>
+        </template>
+
+        <template id="applicant_main_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="/hr_job_offer_letter/static/img/Logo.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <img src="/hr_job_offer_letter/static/img/footer2.png" style="width: 100%"/>
+                    </div>
+                    <t t-call="web.external_layout">
+                        <t t-call="hr_job_offer_letter.applicant_temp"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="hr_applicant_job_offer_report" model="ir.actions.report">
+            <field name="name">HR Job Offer Letter</field>
+            <field name="model">hr.applicant</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_job_offer_letter.applicant_main_temp</field>
+            <field name="report_file">hr_job_offer_letter.applicant_main_temp</field>
+            <field name="paperformat_id" ref="paperformat_custom_applicant_pdf"/>
+        </record>
+
+    </data>
+</odoo>

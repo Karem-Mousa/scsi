@@ -1,0 +1,254 @@
+<odoo>
+    <data>
+        <report
+                id="monthly_appraisal_report"
+                model="hr.appraisal"
+                string="Monhtly Appraisal"
+                report_type="qweb-pdf"
+                menu="False"
+                name="centione_employee_appraisal.report_monthly_appraisal"
+                file="centione_employee_appraisal.report_monthly_appraisal"
+        />
+
+        <template id="monthly_appraisal_header_footer">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <table style="">
+                    <tbody>
+                        <div class="row">
+                            <div class="text-left col-6">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height: 100px;"
+                                     alt="Logo"/>
+                            </div>
+                            <div class="text-right col-6"/>
+                            <!--                                <img t-if="company.logo_arabic" t-att-src="image_data_uri(company.logo_arabic)"-->
+                            <!--                                     style="height: 100px;"-->
+                            <!--                                     alt="Logo"/>-->
+                            <!--                            </div>-->
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--            <div class="footer o_background_footer">-->
+            <!--                <div class=" text-center">-->
+            <!--                    <div class=" text-right">-->
+            <!--                        <span style="color:black">Actual Date :-->
+            <!--                        </span>-->
+            <!--                        <span style="color:black"-->
+            <!--                              t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')">-->
+            <!--                        </span>-->
+            <!--                    </div>-->
+            <!--                    <div class="page_number">-->
+
+            <!--                        <div class="text-muted">-->
+
+            <!--                            Page:-->
+            <!--                            <span class="page"/>-->
+            <!--                            /-->
+            <!--                            <span class="topage"/>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </template>
+
+
+        <template id="report_monthly_appraisal_document">
+            <t t-call="centione_employee_appraisal.monthly_appraisal_header_footer"/>
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="text-center">
+                        <span style="font-size:20px" t-esc="o.kpi_id.name"></span>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div dir="rtl" class="col-6">
+                            <div>
+                                <span>الوظيفة:</span>
+                                <span t-esc="o.employee_id.job_id.name"></span>
+                            </div>
+                        </div>
+                        <div dir="rtl" class="col-6">
+                            <div class="text-right">
+                                <span>الاسم:</span>
+                                <span t-esc="o.employee_id.name"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div dir="rtl" class="col-6">
+                            <div>
+                                <span>تاريخ انتهاء الاختبار:</span>
+                                <span t-esc="o.date_close"></span>
+                            </div>
+                        </div>
+                        <div dir="rtl" class="col-3">
+                            <div>
+                                <span>تاريخ التعيين:</span>
+                                <span t-esc="o.employee_id.hire_date"></span>
+                            </div>
+                        </div>
+                        <div dir="rtl" class="col-3">
+                            <div>
+                                <span>الادارة:</span>
+                                <span t-esc="o.department_id.name"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="text-right" dir="rtl" style="text-decoration: underline;font-size:20px">أولا :
+                        التقييم:
+                    </div>
+                    <br/>
+                    <table dir="rtl" class="text-center"
+                           style="width:100%; border: 1px solid;border-collapse: collapse;">
+
+                        <tbody dir="rtl" class="text-center"
+                               style="width:100%; border: 1px solid;border-collapse: collapse;">
+                            <tr dir="rtl" class="text-center"
+                                style="width:100%; border: 1px solid;border-collapse: collapse;">
+                                <th style=" border: 1px solid;border-collapse: collapse;">م</th>
+                                <th style=" border: 1px solid;border-collapse: collapse;">عناصر التقييم</th>
+                                <th style="width:50%; border: 1px solid;border-collapse: collapse;">التقييم</th>
+                                <th style="border: 1px solid;border-collapse: collapse;">الدرجة المستحقة</th>
+                            </tr>
+                            <t t-set="seq" t-value="0"/>
+                            <t t-foreach="o.manager_appraisal_line" t-as="m_line">
+                                <tr dir="rtl" class="text-center"
+                                    style="width:100%; border: 1px solid;border-collapse: collapse;">
+                                    <th style=" border: 1px solid;border-collapse: collapse;"
+                                        t-esc="m_line_index+1"></th>
+                                    <t t-set="seq" t-value="m_line_index+1"/>
+                                    <th style=" border: 1px solid;border-collapse: collapse;"
+                                        t-esc="m_line.question"></th>
+                                    <th style="width:50%; border: 1px solid;border-collapse: collapse;"
+                                        t-esc="m_line.full_mark"></th>
+                                    <th style="border: 1px solid;border-collapse: collapse;"
+                                        t-esc="m_line.mark_added"></th>
+                                </tr>
+                            </t>
+                            <tr dir="rtl" class="text-center"
+                                style="width:100%; border: 1px solid;border-collapse: collapse;"
+                                t-foreach="o.hr_appraisal_line" t-as="h_line">
+                                <th style=" border: 1px solid;border-collapse: collapse;"
+                                    t-esc="seq+h_line_index+1"></th>
+                                <th style=" border: 1px solid;border-collapse: collapse;"
+                                    t-esc="h_line.question"></th>
+                                <th style="width:50%; border: 1px solid;border-collapse: collapse;"
+                                    t-esc="h_line.full_mark"></th>
+                                <th style="border: 1px solid;border-collapse: collapse;"
+                                    t-esc="h_line.mark_added"></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div class="text-right" dir="rtl" style="text-decoration: underline;font-size:20px">ثانيا : نتيجة
+                        التقييم
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <t t-set="total_manager"
+                                   t-value="sum([m.full_mark for m in o.manager_appraisal_line])"/>
+                                <t t-set="total_hr" t-value="sum([h.full_mark for h in o.hr_appraisal_line])"/>
+                                <span>اجمالي درجاتها :</span>
+                                <span t-esc="total_manager+total_hr"></span>
+                            </div>
+                            <div>
+                                <span>النسبة المؤية :</span>
+                                <span>%</span>
+                                <span t-esc="o.total_manager_hr_appraisal"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-right">
+                                <span>عدد البنود التي تم تقييمها :</span>
+                                <span t-esc="len(o.manager_appraisal_line)+len(o.hr_appraisal_line)"></span>
+                            </div>
+                            <div class="text-right">
+                                <t t-set="total_manager_mark"
+                                   t-value="sum([m.mark_added for m in o.manager_appraisal_line])"/>
+                                <t t-set="total_hr_mark" t-value="sum([h.mark_added for h in o.hr_appraisal_line])"/>
+                                <span>درجة التقييم المستحقة :</span>
+                                <span t-esc="total_manager_mark+total_hr_mark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div dir="rtl" class="col-6">
+                            <div>
+                                <div dir="rtl" style="font-size:20px" t-esc="o.recomndetions">
+                                </div>
+                            </div>
+                        </div>
+                        <div dir="rtl" class="col-6">
+                            <div class="text-right">
+                                <div class="text-right" dir="rtl" style="text-decoration: underline;font-size:20px">
+                                    ثالثا : التوصيات
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <div dir="rtl">
+                                <span>مدير الادارة</span>
+                            </div>
+                            <div dir="rtl">
+                                <span>الاسم :</span>
+                                <span t-esc="o.employee_id.coach_id.name"></span>
+                            </div>
+                            <div dir="rtl">
+                                <span style="margin-left:185px">التوقيع :</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div dir="rtl" class="text-right">
+                                <span>الرئيس المباشر</span>
+                            </div>
+                            <div dir="rtl" class="text-right">
+                                <span>الاسم :</span>
+                                <span t-esc="o.employee_id.parent_id.name"></span>
+                            </div>
+                            <div dir="rtl" class="text-right">
+                                <span>التوقيع :</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="text-left" dir="rtl"
+                         t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"></div>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_monthly_appraisal">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="centione_employee_appraisal.report_monthly_appraisal_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

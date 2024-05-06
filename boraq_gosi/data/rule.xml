@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="GOSI" model="hr.salary.rule.category">
+            <field name="name">GOSI</field>
+            <field name="code">GOSI</field>
+        </record>
+        <record id="PAIDLEAVE" model="hr.salary.rule.category">
+            <field name="name">Paid Leave</field>
+            <field name="code">PAIDLEAVE</field>
+        </record>
+
+        <record id="contribution_register_gosi_emp" model="hr.payroll.structure.type">
+            <field name="name">Employee Contribution</field>
+        </record>
+        <record id="contribution_register_gosi_company" model="hr.payroll.structure.type">
+            <field name="name">Company Contribution</field>
+        </record>
+
+        <record id="hr_payroll_saudi_emp" model="hr.payroll.structure">
+            <field name="name">Salary Structure For Saudi Workers</field>
+            <field name="type_id" ref="contribution_register_gosi_emp"/>
+        </record>
+        <record id="hr_payroll_non_saudi_emp" model="hr.payroll.structure">
+            <field name="name">Salary Structure For Non-Saudi Workers</field>
+            <field name="type_id" ref="contribution_register_gosi_emp"/>
+        </record>
+
+        <record id="hr_rule_BASIC" model="hr.salary.rule">
+            <field name="name">Basic</field>
+            <field name="code">BASIC</field>
+            <field name="sequence" eval="2"/>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage</field>
+        </record>
+        <record id="hr_rule_BASIC_" model="hr.salary.rule">
+            <field name="name">Basic</field>
+            <field name="code">BASIC</field>
+            <field name="sequence" eval="2"/>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="hr_payroll_non_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage</field>
+        </record>
+        <record id="hr_rule_HOSNG" model="hr.salary.rule">
+            <field name="name">Housing</field>
+            <field name="code">HOUSING</field>
+            <field name="sequence" eval="4"/>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">percentage</field>
+            <field name="quantity">1</field>
+            <field name="amount_percentage">25.0</field>
+            <field name="amount_percentage_base">contract.wage</field>
+        </record>
+        <record id="hr_rule_HOSNG_" model="hr.salary.rule">
+            <field name="name">Housing</field>
+            <field name="code">HOUSING</field>
+            <field name="sequence" eval="4"/>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="hr_payroll_non_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">percentage</field>
+            <field name="quantity">1</field>
+            <field name="amount_percentage">25.0</field>
+            <field name="amount_percentage_base">contract.wage</field>
+        </record>
+        <record id="hr_rule_HZRD_COMP" model="hr.salary.rule">
+            <field name="name">Occup. Hazards 2% - Cont. Company</field>
+            <field name="code">HZRD_COMP</field>
+            <field name="sequence" eval="99"/>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = ((categories.BASIC*2)/100)</field>
+        </record>
+        <record id="hr_rule_HZRD_COMP_" model="hr.salary.rule">
+            <field name="name">Occup. Hazards 2% - Cont. Company</field>
+            <field name="code">HZRD_COMP</field>
+            <field name="sequence" eval="99"/>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="struct_id" ref="hr_payroll_non_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = ((categories.BASIC*2)/100)</field>
+        </record>
+        <record id="hr_rule_GOSI" model="hr.salary.rule">
+            <field name="name">GOSI 9% Subscription For Saudi Emp.</field>
+            <field name="code">GOSI</field>
+            <field name="sequence" eval="80"/>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -((categories.BASIC*9)/100)</field>
+        </record>
+        <record id="hr_rule_GOSI_COMP" model="hr.salary.rule">
+            <field name="name">GOSI 9% Company Cont. for Saudi Emp.</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">GOSI_COMP</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = ((categories.BASIC*9)/100)</field>
+        </record>
+        <record id="hr_rule_SANED" model="hr.salary.rule">
+            <field name="name">Saned 1% Jobless Support For Saudi Emp.</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">SANED</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -((categories.BASIC*1)/100)</field>
+        </record>
+        <record id="hr_rule_SANED_COMP" model="hr.salary.rule">
+            <field name="name">Saned 1% Compay Cont. Jobless Support For Saudi Emp.</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">SANED_COMP</field>
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = ((categories.BASIC*1)/100)</field>
+        </record>
+        <!-- <record id="hr_rule_PAIDLEAVE" model="hr.salary.rule">
+            <field name="name">Paid Leave</field>
+            <field name="sequence" eval="151"/>
+            <field name="code">PAIDLEAVE</field>
+            <field name="category_id" ref="PAIDLEAVE"/>
+            <field name="struct_id" ref="hr_payroll_saudi_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+                	if contract.end_contract == True:
+                        if payslip.date_from &lt;= contract.date_end &lt;= payslip.date_to:
+                            result = (contract.wage /30) *(employee.remaining_paid_leaves) 
+                        else: result=0
+                    else: result=0
+            </field>
+        </record> -->
+        <!-- <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW + categories.DED + categories.PAIDLEAVE</field>
+        </record> -->
+    </data>
+</odoo>

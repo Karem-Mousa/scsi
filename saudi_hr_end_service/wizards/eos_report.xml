@@ -1,0 +1,37 @@
+
+<odoo>
+    <data>
+        <act_window name="Employees End of Service" id="act_eos_report"
+                    res_model="eos.report"
+                    view_mode="form"
+                    target="new"/>
+        <menuitem
+                id="menu_eos_report"
+                name="End of Service Report"
+                parent="hr.menu_hr_root"
+                action="act_eos_report"
+                sequence="9"
+        />
+
+        <record id="lost_project_view" model="ir.ui.view">
+            <field name="name">End of service Form</field>
+            <field name="model">eos.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_get_data" string="Confirm and Display" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

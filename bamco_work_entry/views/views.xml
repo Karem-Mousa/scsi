@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <menuitem
+                id="hr_work_entry_contract_enterprise.menu_hr_payroll_work_entries_root"
+                name="Work Entries"
+                parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+                sequence="60"
+                groups="bamco_work_entry.make_work_entry_invisible"/>
+    </data>
+</odoo>

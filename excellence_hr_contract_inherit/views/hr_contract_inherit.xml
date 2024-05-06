@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+        <record id="excel_l10n_sa_hr_payroll_hr_contract_view_form_inherit" model="ir.ui.view">
+            <field name="name">excel_l10n_sa_hr_payroll_hr_contract_view_form_inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="l10n_sa_hr_payroll.hr_contract_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='l10n_sa_housing_allowance']" position="replace">
+                </xpath>
+                <xpath expr="//div[@name='l10n_sa_housing_allowance']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//label[@for='l10n_sa_transportation_allowance']" position="replace">
+                </xpath>
+                <xpath expr="//div[@name='l10n_sa_transportation_allowance']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+                <xpath expr="//label[@for='l10n_sa_other_allowances']" position="replace">
+                </xpath>
+                <xpath expr="//div[@name='l10n_sa_other_allowances']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="excel_hr_contract_view_form" model="ir.ui.view">
+            <field name="name">hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <field name="date_start" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="date_end" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="contract_type_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="wage" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="structure_type_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="excel_bamco_hr_contract_view_centione_hr_contract_form" model="ir.ui.view">
+            <field name="name">hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="bamco_hr_contract.view_centione_hr_contract_form"/>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <field name="contract_statue" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="contract_status" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

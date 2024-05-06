@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="social_insurance_salary_rule" model="hr.salary.rule">
+            <field name="name">Social Insurance</field>
+            <field name="code">SOIN</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="sequence" eval="5"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.social_insurance * -1 if contract.social_insurance_type == 'percentage' else contract.social_insurance_percentage * -1
+            </field>
+        </record>
+
+        <record id="medical_insurance_salary_rule" model="hr.salary.rule">
+            <field name="name">Medical Insurance</field>
+            <field name="code">MEIN</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="sequence" eval="6"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.medical_insurance * -1 if contract.medical_insurance_type == 'percentage' else contract.medical_insurance_percentage * -1
+            </field>
+        </record>
+
+        <record id="house_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">House Allowance</field>
+            <field name="code">HOAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="7"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.housing_amount if contract.house_allowance_type == 'percentage' else contract.housing
+            </field>
+        </record>
+
+        <record id="transportation_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Transportation Allowance</field>
+            <field name="code">TRAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="8"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.transportation_amount if contract.transportation_allowance_type == 'percentage' else contract.transportation
+            </field>
+        </record>
+
+
+        <record id="natural_work_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Natural Work Allowance</field>
+            <field name="code">NWAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="9"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.natural_work_amount if contract.natural_allowance_type == 'percentage' else contract.natural_work
+            </field>
+        </record>
+
+        <record id="food_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Food Allowance</field>
+            <field name="code">FOAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="10"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.food_allowance_amount if contract.food_allowance_type == 'percentage' else contract.food_allowance
+            </field>
+        </record>
+
+        <record id="mobile_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Mobile Allowance</field>
+            <field name="code">MOAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="11"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.mobile_allowance_amount if contract.mobile_allowance_type == 'percentage' else contract.mobile_allowance
+            </field>
+        </record>
+
+        <record id="car_allowance_salary_rule" model="hr.salary.rule">
+            <field name="name">Car Allowance</field>
+            <field name="code">CAAL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="sequence" eval="12"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.car_allowance_amount if contract.car_allowance_type == 'percentage' else contract.car_allowance
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

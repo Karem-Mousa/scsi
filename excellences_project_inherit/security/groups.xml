@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+         <record id="group_management_approve" model="res.groups">
+            <field name="name">Management Approve</field>
+        </record>
+
+
+    </data>
+</odoo>

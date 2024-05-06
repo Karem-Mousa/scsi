@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kpi_appraisal,access.kpi.appraisal,model_kpi_appraisal,,1,1,1,1
+access_manager_kpi_appraisal_line,access.manager.kpi.appraisal.line,model_manager_kpi_appraisal_line,,1,1,1,1
+access_hr_kpi_appraisal_line,access.hr.kpi.appraisal.line,model_hr_kpi_appraisal_line,,1,1,1,1
+access_manager_appraisal_line,access.manager.appraisal.line,model_manager_appraisal_line,,1,1,1,1
+access_hr_appraisal_line,access.hr.appraisal.line,model_hr_appraisal_line,,1,1,1,1
+access_appraisal_data,access.appraisal.data,model_appraisal_data,,1,1,1,1

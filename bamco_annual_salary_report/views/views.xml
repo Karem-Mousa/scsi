@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="extra_hours_view" model="ir.ui.view">
+            <field name="name">extra.hours.view</field>
+            <field name="model">hr.variable.allowance.deduction.type</field>
+            <field name="inherit_id" ref="bamco_hr_variable_allowance_deduction.view_hr_variable_allowance_deduction_type_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group/group/field[@name='half_wage']" position="after">
+                    <field name="is_extra_hours"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="period_month_view" model="ir.ui.view">
+            <field name="name">period.month.view</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='contract_id']" position="before">
+                    <field name="period_month" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="allowance_period_month_view" model="ir.ui.view">
+            <field name="name">allowance.period.month.view</field>
+            <field name="model">hr.variable.allowance.deduction</field>
+            <field name="inherit_id" ref="bamco_hr_variable_allowance_deduction.hr_variable_allowance_deduction_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="period_month" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

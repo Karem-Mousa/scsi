@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-extend="KanbanView.buttons" t-name="button_near_create.button">
+       <t t-jquery="button" t-operation="after">
+               <button t-if="widget.modelName == 'project.task'"
+                       class="btn btn-primary edit_project_action_kanban oe_highlight"
+                       type="button">Edit Project</button>
+       </t>
+   </t>
+</templates>

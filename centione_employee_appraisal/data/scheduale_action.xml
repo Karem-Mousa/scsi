@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="ir_cron_employee_hire_date" model="ir.cron">
+            <field name="name">Employee Hire Date Notify</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.hire_date_monthly_notify()</field>
+        </record>
+
+    </data>
+
+</odoo>

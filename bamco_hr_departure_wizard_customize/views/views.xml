@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="hr_departure_wizard_inherit" model="ir.ui.view">
+            <field name="name">hr_departure_wizard_inherit</field>
+            <field name="model">hr.departure.wizard</field>
+            <field name="inherit_id" ref="hr.hr_departure_wizard_view_form"/>
+            <field name="arch" type="xml">
+
+                <!--                <xpath expr="//div[@id='info']" position="after">-->
+                <xpath expr="//group[@id='action']" position="after">
+                    <group>
+                        <separator colspan="2"/>
+                        <div class="o_td_label" id="atachment">
+                            <span class="o_form_label o_hr_form_label">Attachment</span>
+                        </div>
+                        <div>
+                            <div>
+                                <field name="attachment"/>
+                            </div>
+                        </div>
+
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

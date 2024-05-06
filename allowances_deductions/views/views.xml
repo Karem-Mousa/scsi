@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+
+    <record id="inherit_contract_form_view" model="ir.ui.view">
+      <field name="name">inherit contract form view</field>
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[1]" position="after">
+          <page string="Allowances And Deductions" invisible="1">
+            <group col="2" name="salary_and_advantages">
+              <group string="Social Insurance">
+                <field name="social_insurance_type"/>
+                <field name="social_insurance_percentage"/>
+                <field name="social_insurance" attrs="{'invisible':[('social_insurance_type', '!=', 'percentage')]}"/>
+              </group>
+              <group string="Medical Insurance">
+                <field name="medical_insurance_type"/>
+                <field name="medical_insurance_percentage"/>
+                <field name="medical_insurance" attrs="{'invisible':[('medical_insurance_type', '!=', 'percentage')]}"/>
+              </group>
+              <group string="House Allowance">
+                <field name="with_accommodation" attrs="{'readonly':[('house_periodic', '=', True)]}"/>
+                <field name="house_periodic" attrs="{'readonly':[('with_accommodation', '=', True)]}"/>
+                <field name="house_allowance_type" attrs="{'readonly':[('with_accommodation', '=', True)]}"/>
+                <field name="house_number_of_months" attrs="{'readonly':[('with_accommodation', '=', True)],'required':[('house_periodic', '=', True)],'invisible':[('house_periodic', '!=', True)]}"/>
+                <field name="housing" attrs="{'readonly':[('with_accommodation', '=', True)]}"/>
+                <field name="housing_amount" attrs="{'invisible':[('house_allowance_type', '!=', 'percentage')]}"/>
+                <field name="house_date" attrs="{'readonly':[('with_accommodation', '=', True)],'required':[('house_periodic', '=', True)],'invisible':[('house_periodic', '!=', True)]}"/>
+              </group>
+
+              <group string="Transportation Allowance">
+                <field name="transportation_allowance_type" attrs="{'readonly':[('with_accommodation', '=', True)]}"/>
+                <field name="transportation" attrs="{'readonly':[('with_accommodation', '=', True)]}"/>
+                <field name="transportation_amount" attrs="{'invisible':[('transportation_allowance_type', '!=', 'percentage')],'readonly':[('with_accommodation', '=', True)]}"/>
+              </group>
+              <group string="Natural Work Allowance">
+                <field name="natural_allowance_type"/>
+                <field name="natural_work"/>
+                <field name="natural_work_amount" attrs="{'invisible':[('natural_allowance_type', '!=', 'percentage')]}"/>
+              </group>
+              <group string="Food Allowance">
+                <field name="food_allowance_type"/>
+                <field name="food_allowance"/>
+                <field name="food_allowance_amount" attrs="{'invisible':[('food_allowance_type', '!=', 'percentage')]}"/>
+              </group>
+              <group string="Mobile Allowance">
+                <field name="mobile_allowance_type"/>
+                <field name="mobile_allowance"/>
+                <field name="mobile_allowance_amount" attrs="{'invisible':[('mobile_allowance_type', '!=', 'percentage')]}"/>
+              </group>
+              <group string="Car Allowance">
+                <field name="car_allowance_type"/>
+                <field name="car_allowance"/>
+                <field name="car_allowance_amount" attrs="{'invisible':[('car_allowance_type', '!=', 'percentage')]}"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

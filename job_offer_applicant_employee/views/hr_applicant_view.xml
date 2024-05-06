@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+       <record id="custom_applicant_view_form_inherit_create_job_offer" model="ir.ui.view">
+            <field name="name">hr.applicant.form.inherit.create_job_offer</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+<!--               <xpath expr="//button[@name='create_employee_from_applicant']" position="after">-->
+<!--                    <button string="Create Job Offer Request" name="%(action_view_job_offer_request_wizard)d" type="action" class="oe_highlight" attrs="{'invisible': [('custom_job_offer_id', '!=', False)]}"/>-->
+<!--               </xpath>-->
+               <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="custom_job_offer_id" attrs="{'invisible': [('custom_job_offer_id', '=', False)]}"/>
+               </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+ 

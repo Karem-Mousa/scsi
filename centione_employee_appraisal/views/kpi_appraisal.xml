@@ -1,0 +1,57 @@
+<odoo>
+  <data>
+    <record id="kpi_appraisal_form" model="ir.ui.view">
+        <field name="name">kpi.appraisal.form</field>
+        <field name="model">kpi.appraisal</field>
+        <field name="arch" type="xml">
+            <form string="KPI Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="monthly_evaluation"/>
+                    </group>
+                  <group>
+                        <field name="manager_appraisal_line">
+                          <tree string="Questions" editable="Bottom">
+                            <field name="question"/>
+                            <field name="full_mark"/>
+                            <field name="mark_added" invisible="1"/>
+                          </tree>
+                        </field>
+                    </group>
+
+                    <group>
+                        <field name="hr_appraisal_line">
+                          <tree string="Questions" editable="Bottom">
+                            <field name="question"/>
+                            <field name="full_mark"/>
+                            <field name="mark_added" invisible="1"/>
+                          </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="kpi_appraisal_tree" model="ir.ui.view">
+        <field name="name">kpi.appraisal.tree</field>
+        <field name="model">kpi.appraisal</field>
+        <field name="arch" type="xml">
+            <tree string="KPI Tree">
+                <field name="name"/>
+                <field name="monthly_evaluation"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="kpi_appraisal_action" model="ir.actions.act_window">
+        <field name="name">KPI</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kpi.appraisal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="kpi_appraisal_menu" name="KPI" parent="hr_appraisal.menu_hr_appraisal_configuration" action="kpi_appraisal_action" sequence="100"/>
+  </data>
+</odoo>

@@ -1,0 +1,283 @@
+<odoo>
+    <data>
+
+        <template id="bamco_loan_report_document">
+            <t t-call="web.basic_layout">
+                <div class="header">
+                    <div class="row">
+
+                        <div class="col-9 text-left">
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                 style="max-height: 50px;"
+                                 alt="Logo" />
+                        </div>
+                        <div class="col-3 mb4">
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <style>
+                        .employee {
+                        width: 10px;
+                        height: 20px;
+                        align: right;
+                        /* Rotate div */
+                        -webkit-transform: rotate(90deg); /* Chrome*/
+                        }
+                        .financial {
+                        width: 2px;
+                        align: right;
+                        height: 10px;
+                        /* Rotate div */
+                        -webkit-transform: rotate(90deg); /* Chrome*/
+                        }
+                    </style>
+                    <div class="oe_title">
+                        <h2 align="center" style="font-size: 20px;bold;">طلب سلفة وتعهد سداد</h2>
+                    </div>
+                    <table class="table table-bordered" style="border-color:black" width="100%">
+                        <tr col="12">
+                            <tr style="background-color:#d7d7d7;" align="center">
+                                <th colspan="11" style="margin-left: 6rem;">٨ employee information معلومات الموظف</th>
+                                <th class="employee" rowspan="30">Employee خاص بالموظف</th>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="2">ID Number</th>
+                                <td>
+                                    <span t-field="doc.employee_id.identification_id"/>
+                                </td>
+                                <th colspan="2">الهوية</th>
+                                <th colspan="2">Name</th>
+                                <td>
+                                    <span t-field="doc.employee_id.name"/>
+                                </td>
+                                <th colspan="2">الاسم</th>
+                            </tr>
+
+                            <tr col="11">
+                                <th colspan="2">Job Title</th>
+                                <td>
+                                    <span t-field="doc.employee_id.job_id.name"/>
+                                </td>
+                                <th colspan="2">المسمى الوظيفى</th>
+                                <th colspan="2">Department</th>
+                                <td>
+                                    <span t-field="doc.employee_id.department_id.name"/>
+                                </td>
+                                <th colspan="2">القسم</th>
+                            </tr>
+
+
+                            <tr col="11">
+                                <th colspan="2">Job Number</th>
+                                <td>
+                                    <span t-field="doc.employee_id.attendance_id_char"/>
+                                </td>
+                                <th colspan="2">الرقم الوظيفى</th>
+                                <th colspan="2">Date Of Appointment</th>
+                                <td>
+                                    <span t-field="doc.employee_id.hiring_date"/>
+                                </td>
+                                <th colspan="2">تاريخ التعيين</th>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="5" align="center">
+                                    Loan Amount
+                                </th>
+                                <td>
+                                    <span t-field="doc.requested_amount"/>
+                                    <!--                                    <span t-field="doc.name"/>-->
+                                </td>
+
+                                <th colspan="5" align="center">
+                                    مبلغ الطلب(السلفة)
+                                </th>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="5" align="center">
+                                    Reason Of Request
+                                </th>
+                                <td>
+                                    <span t-field="doc.name"/>
+                                </td>
+
+                                <th colspan="5" align="center">
+                                    السبب
+                                </th>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="5" align="center">
+                                    The Date Of Application
+                                </th>
+                                <td>
+                                    <span t-field="doc.requested_date"/>
+                                </td>
+
+                                <th colspan="5" align="center">
+                                    تاريخ الطلب
+                                </th>
+                            </tr>
+                            <tr col="11">
+                                <td colspan="11">
+                                    <span t-field="doc.comment"/>
+                                </td>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="5" align="center">
+                                    Signature
+                                </th>
+                                <td>
+                                </td>
+
+                                <th colspan="5" align="center">
+                                    التوقيع
+                                </th>
+                            </tr>
+                        </tr>
+                    </table>
+
+                    <table class="table table-bordered" style="border-color:black;" width="100%">
+                        <tr col="12">
+                            <tr style="background-color:#d7d7d7;" align="center">
+                                <th colspan="11" style="margin-left: 6rem;">خاص بالأدارة</th>
+                                <th class="employee" rowspan="50">شؤون الموظفينPersonal Administration</th>
+                            </tr>
+                            <tr col="11">
+                                <th colspan="2">Employee Salary Details</th>
+                                <th colspan="2" align="right">تفاصيل راتب الموظف</th>
+                                <tr>
+                                    <th colspan="1">Transportation</th>
+                                    <td>
+                                        <span t-field="doc.employee_id.contract_id.transportation_allowance"/>
+                                    </td>
+                                    <th colspan="1">مواصلات:</th>
+                                    <th colspan="1">Housing</th>
+                                    <td>
+                                        <span t-field="doc.employee_id.contract_id.house_allowance"/>
+                                    </td>
+                                    <th colspan="1">سكن:</th>
+                                    <th colspan="1">Basic Salary</th>
+                                    <td>
+                                        <span t-field="doc.employee_id.contract_id.wage"/>
+                                    </td>
+                                    <th colspan="1">أساسى:</th>
+                                </tr>
+                                <tr col="11">
+                                    <th colspan="1">Other</th>
+                                    <td>
+                                        <span t-field="doc.employee_id.contract_id.other_allowance"/>
+                                    </td>
+                                    <th colspan="1">أخرى:</th>
+                                </tr>
+                            </tr>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="border-color:black; margin-top: -20px;" width="100%">
+                        <tr col="12">
+                            <tr>
+                                <th colspan="11" style="margin-left: 6rem;">
+                                    <tr>
+                                        <tr>
+                                            <th>No</th>
+                                            <td>
+                                                <label class="container">
+                                                    <input type="checkbox"/>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <th>لا:</th>
+                                            <th>Yes</th>
+                                            <td>
+                                                <label class="container">
+                                                    <input type="checkbox"/>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <th>نعم</th>
+
+                                            <th>يوجد التزامات مالية:</th>
+                                            <th class="financial" rowspan="1" style="background-color:#d7d7d7;">الادارة
+                                                المالية
+                                                Finantiol Managment
+                                            </th>
+                                        </tr>
+                                    </tr>
+                                </th>
+                            </tr>
+                        </tr>
+                        <br></br>
+                        <tr col="12">
+                            <tr>
+                                <th colspan="11" style="margin-left: 6rem;">
+                                    <tr>
+                                        <th>لا يعتمد</th>
+                                        <td>
+                                            <label class="container">
+                                                <input type="checkbox"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
+                                        <th colspan="3"></th>
+
+                                        <th>يعتمد</th>
+                                        <td>
+                                            <label class="container">
+                                                <input type="checkbox"/>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
+                                        <th class="financial" rowspan="1" style="background-color:#d7d7d7;">الموارد
+                                            البشرية
+                                            Hr Accreditation
+                                        </th>
+                                    </tr>
+                                </th>
+                            </tr>
+                        </tr>
+                        <br></br>
+                        <tr col="12" align="center">
+                            <td>
+                                .......................................................................................................................
+                            </td>
+                            <th colspan="11" style="margin-left: 6rem;">:فى حالة الاعتماد يتم سداد المبلغ على النحو
+                                التالى
+                            </th>
+
+                        </tr>
+                    </table>
+
+
+                </div>
+                <div class="footer o_standard_footer">
+                    <div class="row">
+                        <div class="col-12">
+                            <img src='/bamco_loan_report/static/footer.jpeg' style="width: 100%;" align="center"/>
+
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="bamco_loan_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="bamco_loan_report.bamco_loan_report_document">
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="action_bamco_loan_report" model="ir.actions.report">
+            <field name="name">Loan Report</field>
+            <field name="model">hr.loan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bamco_loan_report.bamco_loan_report</field>
+            <field name="report_file">bamco_loan_report.bamco_loan_report</field>
+            <field name="print_report_name">(object.name or 'Loan').replace('/','_')</field>
+            <field name="binding_model_id" ref="bamco_hr_loan_correct.model_hr_loan"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

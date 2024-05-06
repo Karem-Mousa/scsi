@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="transfer_allocation_multi_company" model="ir.rule">
+            <field name="name">transfer_allocation_multi_company</field>
+            <field name="model_id" ref="model_transfer_allocation"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="global" eval="1"/>
+        </record>
+
+        <record id="transfer_allocation_view_form" model="ir.ui.view">
+            <field name="name">transfer_allocation_view_form</field>
+            <field name="model">transfer.allocation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="transfer_from" widget="many2many_tags"/>
+                                <field name="date_from" invisible="1"/>
+                                <field name="days"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="transfer_to"/>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="transfer_allocation_view_tree" model="ir.ui.view">
+            <field name="name">transfer_allocation_view_tree</field>
+            <field name="model">transfer.allocation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="transfer_from" widget="many2many_tags"/>
+                    <field name="transfer_to"/>
+                    <field name="date_from" invisible="1"/>
+                    <field name="date_to"/>
+                    <field name="days"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="transfer_allocation_action" model="ir.actions.act_window">
+            <field name="name">Transfer Allocation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transfer.allocation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="transfer_allocation_menu" name="Transfer Allocation" parent="hr_holidays.menu_hr_holidays_root"
+                  action="transfer_allocation_action" sequence="5"/>
+    </data>
+</odoo>

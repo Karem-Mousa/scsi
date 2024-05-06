@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_excel_insurance_companies,access_excel_insurance_companies,model_excel_insurance_companies,,1,1,1,1
+access_excel_employee_relations,access_excel_employee_relations,model_excel_employee_relations,,1,1,1,1
+access_excel_insurance_companies_name,access_excel_insurance_companies_name,model_excel_insurance_companies_name,,1,1,1,1
+access_excel_insurance_companies_class,access_excel_insurance_companies_class,model_excel_insurance_companies_class,,1,1,1,1

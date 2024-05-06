@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="leave_report_employee_iqama_form_inherit" model="ir.ui.view">
+            <field name="name">leave.report.employee.iqama.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='has_work_permit']" position="after">
+                    <field name="iqama_end_date"/>
+                </xpath>
+                <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bank_account_id']" position="after">
+                    <field name="bank_number"/>
+                    <field name="bank_name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
